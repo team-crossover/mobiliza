@@ -20,3 +20,9 @@
   - Login requerido
 - Confirmar interesse nos eventos que pretende comparecer.
   - Login requerido
+  
+# NÃO está no escopo:
+- Funcionalidade de chat e/ou chamadas telefônicas;
+- Funcionalidade de doação ou arrecadação de dinheiro;
+- Exibir propagandas.
+
