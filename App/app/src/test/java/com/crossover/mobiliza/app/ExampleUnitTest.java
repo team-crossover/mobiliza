@@ -1,4 +1,4 @@
-package com.nelsonwilliam.mobiliza.app;
+package com.crossover.mobiliza.app;
 
 import org.junit.Test;
 

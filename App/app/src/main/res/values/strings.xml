@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mobiliza App</string>
+    <string name="user_name_label">Você é %s!</string>
+    <string name="user_name_guest">convidado(a)</string>
+    <string name="sign_out_label">Sair</string>
+    <string name="disconnect_label">Desconectar</string>
 </resources>
