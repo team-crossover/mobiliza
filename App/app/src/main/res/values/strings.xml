@@ -1,7 +1,27 @@
 <resources>
-    <string name="app_name">Mobiliza App</string>
+    <!-- Configurações -->
+    <string name="app_name">Mobiliza</string>
+    <string name="api_base_url">http://192.168.1.8:8080/</string>
+    <string name="server_client_id">36428791114-9jdc0t2d006tvnmvpujbf02ppse28aoa.apps.googleusercontent.com</string>
+    <!-- Interface -->
     <string name="user_name_label">Você é %s!</string>
     <string name="user_name_guest">convidado(a)</string>
     <string name="sign_out_label">Sair</string>
     <string name="disconnect_label">Desconectar</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="eventos_tab_name">Eventos</string>
+    <string name="ongs_tab_name">Ongs</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_signin">Entrar</string>
+    <string name="action_signout">Sair</string>
+    <string name="action_edit_profile">Editar perfil</string>
+    <string name="toast_auth_error">Não foi possível autenticar</string>
+    <string name="progress_message">Carregando...</string>
+    <string name="unknownError">Erro desconhecido</string>
+    <string name="networkError">Erro de rede</string>
+    <string name="requestTimeOutError">Erro (tempo esgotado)</string>
+    <string name="button_confirm">Confirmar</string>
+    <string name="toast_data_error">Erro ao obter dados</string>
+    <string name="toast_save_error">Erro ao salvar dados</string>
+    <string name="toast_save_success">Dados salvos</string>
 </resources>
