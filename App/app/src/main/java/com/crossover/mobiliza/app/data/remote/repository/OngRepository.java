@@ -33,8 +33,7 @@ public class OngRepository {
     private final AppServices appServices;
     private final OngDao ongDao;
     private final OngService ongService;
-
-    private RateLimiter<Long> rateLimiter = new RateLimiter<Long>(30, TimeUnit.SECONDS);
+    private RateLimiter<Long> rateLimiter;
 
     public static OngRepository getInstance(Context context) {
         if (sInstance == null) {
@@ -51,6 +50,7 @@ public class OngRepository {
         ongDao = appDatabase.ongDao();
         appServices = AppServices.getInstance(context);
         ongService = appServices.createService(OngService.class);
+        rateLimiter = new RateLimiter<Long>(10, TimeUnit.SECONDS);
     }
 
     public LiveData<Resource<List<Ong>>> findAll() {
@@ -109,14 +109,13 @@ public class OngRepository {
     }
 
     public void save(final Ong ong, final String googleIdToken, final Consumer<Ong> onSuccess, final Consumer<String> onFailure) {
-        Log.i(TAG, "save: " + ong.toString());
         AppExecutors.getInstance().network().execute(() -> {
             AppServices.runCallAsync(ongService.save(ong, googleIdToken),
                     newOng -> {
                         rateLimiter.shouldFetch(null);
                         rateLimiter.shouldFetch(ong.getId());
                         onSuccess.accept(newOng);
-                        Log.i(TAG, "saveNewOng: " + newOng.toString());
+                        Log.i(TAG, "saved ong: " + newOng.toString());
                     },
                     errorMsg -> {
                         onFailure.accept(errorMsg);

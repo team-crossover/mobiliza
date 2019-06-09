@@ -42,9 +42,20 @@ public class MainOngsFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_eventos, container, false);
 
-        // Atualiza o TextView com uma lista das ongs atuais
-        // TODO: Parar de usar esse TextView ridículo e usar uma RecyclerView bonitinha
-        final TextView textView = root.findViewById(R.id.test_label);
+        //...?
+
+        return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // TODO: Parar de usar esse TextView ridículo e usar uma RecyclerView decente
+        // TODO: Adicionar um "swipe to refresh"
+
+        // Atualiza a lista de ongs
+        final TextView textView = getView().findViewById(R.id.test_label);
         mainOngsViewModel.findAllOngs(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {
                 StringBuilder sb = new StringBuilder();
@@ -54,6 +65,5 @@ public class MainOngsFragment extends Fragment {
                 textView.setText(sb.toString());
             }
         });
-        return root;
     }
 }
