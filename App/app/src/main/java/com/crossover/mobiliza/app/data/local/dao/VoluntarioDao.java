@@ -14,4 +14,7 @@ public interface VoluntarioDao extends DaoBase<Voluntario> {
     @Query("SELECT * FROM voluntarios")
     LiveData<List<Voluntario>> findAll();
 
+    @Query("SELECT * FROM voluntarios where id = :id")
+    LiveData<Voluntario> findById(long id);
+
 }

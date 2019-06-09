@@ -103,6 +103,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     .getInstance(this)
                     .createService(UserService.class)
                     .findByGoogleTokenId(googleIdToken, asOng);
+            Log.e(TAG, "handleSignInResult: EEEEEEE " + googleIdToken);
             AppServices.runCallAsync(call,
                     // On success
                     user -> {

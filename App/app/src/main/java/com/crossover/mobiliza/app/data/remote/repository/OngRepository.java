@@ -80,6 +80,60 @@ public class OngRepository {
         }.getAsLiveData();
     }
 
+    public LiveData<Resource<List<Ong>>> findAllByCategoria(String categoria) {
+        return new NetworkBoundResource<List<Ong>, List<Ong>>() {
+            @Override
+            protected void saveCallResult(List<Ong> item) {
+                if (item != null)
+                    ongDao.saveAll(item);
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<List<Ong>> loadFromDb() {
+                return ongDao.findAllByCategoria(categoria);
+            }
+
+            @NonNull
+            @Override
+            protected Call<List<Ong>> createCall() {
+                return ongService.findAllByCategoria(categoria);
+            }
+
+            @Override
+            protected boolean shouldFetch() {
+                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+            }
+        }.getAsLiveData();
+    }
+
+    public LiveData<Resource<List<Ong>>> findAllByRegiao(String regiao) {
+        return new NetworkBoundResource<List<Ong>, List<Ong>>() {
+            @Override
+            protected void saveCallResult(List<Ong> item) {
+                if (item != null)
+                    ongDao.saveAll(item);
+            }
+
+            @NonNull
+            @Override
+            protected LiveData<List<Ong>> loadFromDb() {
+                return ongDao.findAllByRegiao(regiao);
+            }
+
+            @NonNull
+            @Override
+            protected Call<List<Ong>> createCall() {
+                return ongService.findAllByRegiao(regiao);
+            }
+
+            @Override
+            protected boolean shouldFetch() {
+                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+            }
+        }.getAsLiveData();
+    }
+
     public LiveData<Resource<Ong>> findById(final long id) {
         return new NetworkBoundResource<Ong, Ong>() {
 

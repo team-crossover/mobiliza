@@ -16,6 +16,12 @@ public interface OngService {
     @GET("ongs")
     Call<List<Ong>> findAll();
 
+    @GET("ongs")
+    Call<List<Ong>> findAllByCategoria(@Query("categoria") String categoria);
+
+    @GET("ongs")
+    Call<List<Ong>> findAllByRegiao(@Query("regiao") String regiao);
+
     @GET("ongs/{id}")
     Call<Ong> findById(@Path("id") Long id);
 

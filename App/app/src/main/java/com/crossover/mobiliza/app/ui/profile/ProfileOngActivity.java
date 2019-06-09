@@ -78,12 +78,9 @@ public class ProfileOngActivity extends AppCompatActivity {
     private void onSave(View view) {
         mProgressDialog.show();
         try {
-            Ong ong = new Ong();
-            ong.setNome(nameText.getText().toString());
-            ong.setDescricao(descText.getText().toString());
-
-            Log.i(TAG, "onSave: " + ong);
-            mViewModel.saveOng(this, ong,
+            mViewModel.saveOng(this,
+                    nameText.getText().toString(),
+                    descText.getText().toString(),
                     newOng -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this.getApplicationContext(), this.getString(R.string.toast_save_success), Toast.LENGTH_LONG).show();

@@ -6,8 +6,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 
-import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.AppExecutors;
+import com.crossover.mobiliza.app.R;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +55,11 @@ public class AppServices {
                     if (response.isSuccessful()) {
                         onSuccess.accept(response.body());
                     } else {
+                        try {
+                            Log.e(TAG, response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         onFailure.accept(response.message());
                     }
                 }

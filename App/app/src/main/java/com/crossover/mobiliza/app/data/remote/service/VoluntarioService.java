@@ -18,7 +18,7 @@ public interface VoluntarioService {
     @GET("voluntarios")
     Call<Voluntario> findById(@Query("id") Long id);
 
-    @POST("voluntarios/edit")
+    @POST("voluntarios")
     Call<Voluntario> save(@Body Voluntario voluntario, @Query("googleIdToken") String idToken);
 
 }
