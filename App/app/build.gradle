@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -52,6 +53,9 @@ dependencies {
     // LiveData and ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.0.0"
+
+    //Design elements
+    implementation 'com.android.support:design:28.0.0'
 
     // Testing
     testImplementation 'junit:junit:4.13-beta-3'

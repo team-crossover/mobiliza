@@ -13,7 +13,7 @@
 
         <EditText
             android:id="@+id/ongNameText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
@@ -21,18 +21,70 @@
 
         <EditText
             android:id="@+id/ongDescricaoText"
-            android:layout_width="213dp"
+            android:layout_width="match_parent"
             android:layout_height="159dp"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:text="Descrição" />
 
+        <TextView
+            android:id="@+id/textViewCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Categoria"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/rgCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbAnimais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Animais" />
+
+            <RadioButton
+                android:id="@+id/rbEducacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Educação" />
+
+            <RadioButton
+                android:id="@+id/rbEsporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esporte" />
+
+            <RadioButton
+                android:id="@+id/rbHumanitario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Humanitário" />
+
+            <RadioButton
+                android:id="@+id/rbMAmbiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meio Ambiente" />
+
+            <RadioButton
+                android:id="@+id/rbTurismo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Turismo" />
+        </RadioGroup>
+
         <Button
             android:id="@+id/ongSaveButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_confirm" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
+import com.crossover.mobiliza.app.data.local.enums.CategoriaEnum;
 import com.crossover.mobiliza.app.data.remote.Resource;
 
 public class ProfileOngActivity extends AppCompatActivity {
@@ -23,6 +26,8 @@ public class ProfileOngActivity extends AppCompatActivity {
     private ProfileOngViewModel mViewModel;
     private EditText nameText;
     private EditText descText;
+    private RadioGroup rgCategoria;
+    private String categoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class ProfileOngActivity extends AppCompatActivity {
 
         nameText = findViewById(R.id.ongNameText);
         descText = findViewById(R.id.ongDescricaoText);
+        rgCategoria = findViewById(R.id.rgCategoria);
+        categoria = new String();
+        verifyCategoria();
 
         mViewModel.getOng(this).observe(this, ongResource -> {
             if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
@@ -55,6 +63,8 @@ public class ProfileOngActivity extends AppCompatActivity {
                 descText.setVisibility(View.VISIBLE);
                 nameText.setText(ong.getNome());
                 descText.setText(ong.getDescricao());
+                categoria=ong.getCategoria();
+                setCategoria();
 
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
 //                nameText.setVisibility(View.GONE);
@@ -81,6 +91,7 @@ public class ProfileOngActivity extends AppCompatActivity {
             mViewModel.saveOng(this,
                     nameText.getText().toString(),
                     descText.getText().toString(),
+                    categoria,
                     newOng -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this.getApplicationContext(), this.getString(R.string.toast_save_success), Toast.LENGTH_LONG).show();
@@ -95,4 +106,54 @@ public class ProfileOngActivity extends AppCompatActivity {
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
+    private void verifyCategoria() {
+        rgCategoria.setOnCheckedChangeListener((group, checkedId) -> {
+
+            switch (checkedId) {
+                case R.id.rbAnimais:
+                    categoria = CategoriaEnum.ANIMAIS.getText();
+                    break;
+                case R.id.rbEducacao:
+                    categoria = CategoriaEnum.EDUCACAO.getText();
+                    break;
+                case R.id.rbEsporte:
+                    categoria = CategoriaEnum.ESPORTE.getText();
+                    break;
+                case R.id.rbHumanitario:
+                    categoria = CategoriaEnum.HUMANITARIO.getText();
+                    break;
+                case R.id.rbMAmbiente:
+                    categoria = CategoriaEnum.MEIO_AMBIENTE.getText();
+                    break;
+                case R.id.rbTurismo:
+                    default: categoria = null;
+            }
+        });
+    }
+
+    private void setCategoria() {
+
+        if (categoria.equals(CategoriaEnum.ANIMAIS.getText())) {
+            rgCategoria.check(R.id.rbAnimais);
+
+        } else if (categoria.equals(CategoriaEnum.EDUCACAO.getText())) {
+            rgCategoria.check(R.id.rbEducacao);
+
+        } if (categoria.equals(CategoriaEnum.ESPORTE.getText())) {
+            rgCategoria.check(R.id.rbEducacao);
+
+        } if (categoria.equals(CategoriaEnum.HUMANITARIO.getText())) {
+            rgCategoria.check(R.id.rbHumanitario);
+
+        } if (categoria.equals(CategoriaEnum.MEIO_AMBIENTE.getText())) {
+            rgCategoria.check(R.id.rbMAmbiente);
+
+        } if (categoria.equals(CategoriaEnum.TURISMO.getText())) {
+            rgCategoria.check(R.id.rbTurismo);
+        }
+
+    }
+
+
 }

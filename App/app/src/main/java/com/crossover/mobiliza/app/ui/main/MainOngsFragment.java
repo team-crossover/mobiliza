@@ -60,7 +60,8 @@ public class MainOngsFragment extends Fragment {
             if (listResource.getData() != null) {
                 StringBuilder sb = new StringBuilder();
                 for (Ong ong : listResource.getData()) {
-                    sb.append(ong.getNome() + ": " + ong.getDescricao() + "\n\n\n");
+                    sb.append(ong.getNome() + ": " + ong.getDescricao() + "\n" +
+                            ong.getCategoria()+"\n\n");
                 }
                 textView.setText(sb.toString());
             }

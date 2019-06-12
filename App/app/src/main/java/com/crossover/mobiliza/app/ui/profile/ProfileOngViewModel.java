@@ -30,12 +30,15 @@ public class ProfileOngViewModel extends ViewModel {
     public void saveOng(Context context,
                         String nome,
                         String descricao,
+                        String categoria,
                         Consumer<Ong> onSuccess,
                         Consumer<String> onFailure) {
         Ong ong = new Ong();
         ong.setId(mOngId);
         ong.setNome(nome);
+        ong.setCategoria(categoria);
         ong.setDescricao(descricao);
+
         OngRepository.getInstance(context).save(ong, mGoogleIdToken, onSuccess, onFailure);
     }
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +24,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import retrofit2.Call;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private GoogleSignInClient mGoogleSignInClient;
     private User mUser;
+    private static FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
         setupToolbar();
         setupAuth();
+        setupFab();
+
     }
 
 
@@ -48,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         refreshAuth();
+    }
+
+    private void setupFab() {
+        //Create floating action button to create event
+        fab = findViewById(R.id.fabAddEvent);
+        if (mUser == null) {
+            fab.hide();
+        } else {
+            fab.show();
+        }
+        fab.setOnClickListener(v -> Snackbar.make(v, "adicionar evento", Snackbar.LENGTH_SHORT).show());
     }
 
     private void setupLayout() {
