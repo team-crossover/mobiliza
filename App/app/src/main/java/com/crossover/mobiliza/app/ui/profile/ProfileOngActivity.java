@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -63,7 +62,7 @@ public class ProfileOngActivity extends AppCompatActivity {
                 descText.setVisibility(View.VISIBLE);
                 nameText.setText(ong.getNome());
                 descText.setText(ong.getDescricao());
-                categoria=ong.getCategoria();
+                categoria = ong.getCategoria();
                 setCategoria();
 
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
@@ -127,7 +126,10 @@ public class ProfileOngActivity extends AppCompatActivity {
                     categoria = CategoriaEnum.MEIO_AMBIENTE.getText();
                     break;
                 case R.id.rbTurismo:
-                    default: categoria = null;
+                    categoria = CategoriaEnum.TURISMO.getText();
+                    break;
+                default:
+                    categoria = null;
             }
         });
     }
@@ -140,18 +142,18 @@ public class ProfileOngActivity extends AppCompatActivity {
         } else if (categoria.equals(CategoriaEnum.EDUCACAO.getText())) {
             rgCategoria.check(R.id.rbEducacao);
 
-        } if (categoria.equals(CategoriaEnum.ESPORTE.getText())) {
+        } else if (categoria.equals(CategoriaEnum.ESPORTE.getText())) {
             rgCategoria.check(R.id.rbEducacao);
 
-        } if (categoria.equals(CategoriaEnum.HUMANITARIO.getText())) {
+        } else if (categoria.equals(CategoriaEnum.HUMANITARIO.getText())) {
             rgCategoria.check(R.id.rbHumanitario);
 
-        } if (categoria.equals(CategoriaEnum.MEIO_AMBIENTE.getText())) {
+        } else if (categoria.equals(CategoriaEnum.MEIO_AMBIENTE.getText())) {
             rgCategoria.check(R.id.rbMAmbiente);
 
-        } if (categoria.equals(CategoriaEnum.TURISMO.getText())) {
+        } else if (categoria.equals(CategoriaEnum.TURISMO.getText())) {
             rgCategoria.check(R.id.rbTurismo);
-        }
+        } else { }
 
     }
 

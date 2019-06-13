@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.crossover.mobiliza.app.R;
+import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.remote.service.AppServices;
 import com.crossover.mobiliza.app.data.remote.service.UserService;
+import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileVoluntarioActivity;
 import com.crossover.mobiliza.app.ui.signin.SigninActivity;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private GoogleSignInClient mGoogleSignInClient;
     private User mUser;
+    private Evento event;
     private static FloatingActionButton fab;
 
     @Override
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         setupAuth();
         setupFab();
 
+        event = new Evento();
+
     }
 
 
@@ -58,13 +61,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFab() {
-        //Create floating action button to create event
+        //Create floating action button to create an event
         fab = findViewById(R.id.fabAddEvent);
-        if (mUser == null) {
-            fab.hide();
-        } else {
-            fab.show();
-        }
         fab.setOnClickListener(v -> Snackbar.make(v, "adicionar evento", Snackbar.LENGTH_SHORT).show());
     }
 
@@ -99,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             menu.add(0, 2, Menu.NONE, R.string.action_edit_profile);
             menu.add(0, 3, Menu.NONE, R.string.action_signout);
+            menu.add(0, 4, Menu.NONE, "EventoTeste");
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -114,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case 3:
                 signOut();
+                return true;
+            case 4:
+                showAddEvent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -134,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
             myIntent = new Intent(this, ProfileVoluntarioActivity.class);
             myIntent.putExtra("idVoluntario", mUser.getIdVoluntario());
         }
+        myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
+        this.startActivity(myIntent);
+    }
+
+    private void showAddEvent() {
+        Intent myIntent = new Intent(this, AddEventActivity.class);
+        myIntent.putExtra("idEvent", event.getId());
         myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
         this.startActivity(myIntent);
     }
