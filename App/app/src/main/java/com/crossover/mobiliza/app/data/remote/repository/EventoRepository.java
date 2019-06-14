@@ -50,7 +50,7 @@ public class EventoRepository {
         eventoDao = appDatabase.eventoDao();
         appServices = AppServices.getInstance(context);
         eventoService = appServices.createService(EventoService.class);
-        rateLimiter = new RateLimiter<Long>(10, TimeUnit.SECONDS);
+        rateLimiter = new RateLimiter<>(10, TimeUnit.SECONDS);
     }
 
     public LiveData<Resource<List<Evento>>> findAll() {
@@ -70,7 +70,7 @@ public class EventoRepository {
             @NonNull
             @Override
             protected Call<List<Evento>> createCall() {
-                return eventoService.findAll();
+                return eventoService.findAll(null, null, null, null);
             }
 
             @Override
@@ -97,7 +97,7 @@ public class EventoRepository {
             @NonNull
             @Override
             protected Call<List<Evento>> createCall() {
-                return eventoService.findAllByOng(idOng);
+                return eventoService.findAll(idOng, null, null, null);
             }
 
             @Override
@@ -107,7 +107,7 @@ public class EventoRepository {
         }.getAsLiveData();
     }
 
-    public LiveData<Resource<List<Evento>>> findAllByFinalizado(boolean finalizado) {
+    public LiveData<Resource<List<Evento>>> findAllByFinalizado(Boolean finalizado) {
         return new NetworkBoundResource<List<Evento>, List<Evento>>() {
             @Override
             protected void saveCallResult(List<Evento> item) {
@@ -124,7 +124,7 @@ public class EventoRepository {
             @NonNull
             @Override
             protected Call<List<Evento>> createCall() {
-                return eventoService.findAllByFinalizado(finalizado);
+                return eventoService.findAll(null, null, null, finalizado);
             }
 
             @Override

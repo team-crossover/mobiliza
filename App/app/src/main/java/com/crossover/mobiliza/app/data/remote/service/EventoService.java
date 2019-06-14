@@ -14,13 +14,10 @@ import retrofit2.http.Query;
 public interface EventoService {
 
     @GET("eventos")
-    Call<List<Evento>> findAll();
-
-    @GET("eventos")
-    Call<List<Evento>> findAllByOng(@Query("idOng") long idOng);
-
-    @GET("eventos")
-    Call<List<Evento>> findAllByFinalizado(@Query("finalizado") boolean finalizado);
+    Call<List<Evento>> findAll(@Query("idOng") Long idOng,
+                               @Query("categoria") String categoria,
+                               @Query("regiao") String regiao,
+                               @Query("finalizado") Boolean finalizado);
 
     @GET("eventos/{id}")
     Call<Evento> findById(@Path("id") Long id);
