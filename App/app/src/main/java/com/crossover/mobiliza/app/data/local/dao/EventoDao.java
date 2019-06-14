@@ -14,8 +14,8 @@ public interface EventoDao extends DaoBase<Evento> {
     @Query("SELECT * FROM eventos")
     LiveData<List<Evento>> findAll();
 
-    @Query("SELECT * FROM eventos WHERE idOng = :idOng")
-    LiveData<List<Evento>> findAllByOng(long idOng);
+//    @Query("SELECT * FROM eventos WHERE idOng = :idOng")
+//    LiveData<List<Evento>> findAllByOng(long idOng);
 
     @Query("SELECT * FROM eventos WHERE strftime('%s', dataRealizacao) < strftime('%s', 'now')")
     LiveData<List<Evento>> findAllFinalizados();

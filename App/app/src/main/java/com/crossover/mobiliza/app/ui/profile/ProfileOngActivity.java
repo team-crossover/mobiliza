@@ -28,6 +28,12 @@ public class ProfileOngActivity extends AppCompatActivity {
     private RadioGroup rgCategoria;
     private String categoria;
 
+    /**
+     * TODO: inserir captação de dados para os outros atributos de ong: telefone, e-mail, endereço e região(possui enum). Olhar a entidade Ong.
+     * - Para economizar espaço, trocar o radio button dos enums por um spinner (similar ao dropdown).
+     * Vai ficar faltando: validação de dados.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

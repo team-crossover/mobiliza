@@ -58,7 +58,7 @@ public class MainEventsFragment extends Fragment {
             if (listResource.getData() != null) {
                 StringBuilder sb = new StringBuilder();
                 for (Evento evt : listResource.getData()) {
-                    sb.append(evt.getNome());
+                    sb.append(evt.getNome()+"\n");
                 }
                 textView.setText(sb.toString());
             }

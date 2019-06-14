@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.crossover.mobiliza.app.data.remote.service.UserService;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileVoluntarioActivity;
+import com.crossover.mobiliza.app.ui.retrieve.GoogleProfileActivity;
 import com.crossover.mobiliza.app.ui.signin.SigninActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -61,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFab() {
-        //Create floating action button to create an event
+        //Create floating action button
         fab = findViewById(R.id.fabAddEvent);
-        fab.setOnClickListener(v -> Snackbar.make(v, "adicionar evento", Snackbar.LENGTH_SHORT).show());
+        fab.setOnClickListener(v -> Snackbar.make(v, "Alguma ação", Snackbar.LENGTH_SHORT).show());
     }
 
     private void setupLayout() {
@@ -95,10 +97,16 @@ public class MainActivity extends AppCompatActivity {
         if (mUser == null) {
             menu.add(0, 1, Menu.NONE, R.string.action_signin);
         } else {
-            menu.add(0, 2, Menu.NONE, R.string.action_edit_profile);
+            if(mUser.isLastUsedAsOng()) {
+                menu.add(0, 2, Menu.NONE, R.string.action_edit_profile);
+                menu.add(0, 4, Menu.NONE, "Novo Evento");
+            }
+            menu.add(0, 5, Menu.NONE, "Informações da conta");
             menu.add(0, 3, Menu.NONE, R.string.action_signout);
-            menu.add(0, 4, Menu.NONE, "EventoTeste");
         }
+
+        //TODO: Aprimorar essa parte.
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -116,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case 4:
                 showAddEvent();
+                return true;
+            case 5:
+                showGoogleAccountInfo();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -146,6 +157,30 @@ public class MainActivity extends AppCompatActivity {
         myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
         this.startActivity(myIntent);
     }
+
+    private void showGoogleAccountInfo() {
+        Intent myIntent = new Intent(this, GoogleProfileActivity.class);
+        GoogleSignInAccount account = SigninActivity.getGoogleAccount();
+        StringBuilder nome = new StringBuilder();
+
+        // Available info only!
+        if (account == null) {
+            return;
+        }
+
+        if (account.getGivenName() != null) {
+            nome.append(account.getGivenName());
+        }
+
+        if(account.getFamilyName() != null) {
+            nome.append(" ");
+            nome.append(account.getFamilyName());
+        }
+
+        myIntent.putExtra("googleName", nome.toString());
+        this.startActivity(myIntent);
+    }
+
 
     // ------------------------------------
     // AUTHENTICATION

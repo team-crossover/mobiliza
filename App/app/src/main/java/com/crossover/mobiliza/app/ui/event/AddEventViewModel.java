@@ -28,13 +28,16 @@ public class AddEventViewModel extends ViewModel {
     }
 
     public void saveEvent(Context context,
-                          String nome,
+                          String nome, String regiao, String descricao, String data,
                           Consumer<Evento> onSuccess,
                           Consumer<String> onFailure) {
 
         Evento evt = new Evento();
         evt.setId(mEventId);
         evt.setNome(nome);
+        evt.setDescricao(descricao);
+        evt.setDataRealizacao(data);
+        evt.setRegiao(regiao);
 
         EventoRepository.getInstance(context).save(evt, mGoogleIdToken, onSuccess, onFailure);
 

@@ -23,12 +23,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/nameEventText"
+            android:id="@+id/eventoNomeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Novo evento" />
+
+        <EditText
+            android:id="@+id/eventoDescricaoText"
+            android:layout_width="match_parent"
+            android:layout_height="159dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:text="Descrição" />
 
         <Button
             android:id="@+id/eventSaveButton"

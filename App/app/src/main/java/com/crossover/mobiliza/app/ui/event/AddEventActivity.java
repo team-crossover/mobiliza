@@ -1,9 +1,12 @@
 package com.crossover.mobiliza.app.ui.event;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +17,12 @@ import android.widget.Toast;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.enums.RegiaoEnum;
 import com.crossover.mobiliza.app.data.remote.Resource;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -23,7 +31,18 @@ public class AddEventActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private AddEventViewModel mViewModel;
     private EditText nameText;
+    private EditText descricao;
+    private String regiao;
+    private String data;
 
+    /**
+     * TODO: inserir captação de dados para os outros atributos de evento: data, endereço, região(possui enum). Olhar a entidade evento.
+     *
+     * Vai ficar faltando: validação de dados e confirmação de participantes.
+     */
+
+    @TargetApi(Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,29 +56,39 @@ public class AddEventActivity extends AppCompatActivity {
         String googleIdToken = getIntent().getStringExtra("googleIdToken");
 
         //if (eventId >= 0) {
-            //Event exists
-            mViewModel = ViewModelProviders.of(this).get(AddEventViewModel.class);
-            mViewModel.setEventoId(eventId);
-            mViewModel.setGoogleIdToken(googleIdToken);
+        //Event exists
+        mViewModel = ViewModelProviders.of(this).get(AddEventViewModel.class);
+        mViewModel.setEventoId(eventId);
+        mViewModel.setGoogleIdToken(googleIdToken);
 
-            nameText = findViewById(R.id.nameEventText);
+        nameText = findViewById(R.id.eventoNomeText);
 
-            mViewModel.getEvento(this).observe(this, eventoResource -> {
-                if (eventoResource.getStatus() == Resource.Status.SUCCESS && eventoResource.getData() != null) {
-                    Evento evt = eventoResource.getData();
-                    mProgressDialog.dismiss();
-                    nameText.setVisibility(View.VISIBLE);
+        /**
+         * TODO: regiao, dataRealizacao e descricao (O QUE ESTÁ AQUI É TEMPORÁRIO, PQ NÃO PODE SER NULO)
+         */
+        regiao = RegiaoEnum.CENTRO.getText();
+        LocalDateTime time = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        data = time.format(formatter);
+        descricao = findViewById(R.id.eventoDescricaoText);
 
-                    nameText.setText(evt.getNome());
+        mViewModel.getEvento(this).observe(this, eventoResource -> {
+            if (eventoResource.getStatus() == Resource.Status.SUCCESS && eventoResource.getData() != null) {
+                Evento evt = eventoResource.getData();
+                mProgressDialog.dismiss();
+                nameText.setVisibility(View.VISIBLE);
 
-                } else if (eventoResource.getStatus() == Resource.Status.LOADING) {
-                    mProgressDialog.show();
+                nameText.setText(evt.getNome());
 
-                } else if (eventoResource.getStatus() == Resource.Status.ERROR) {
-                    mProgressDialog.dismiss();
-                    Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
-                }
-            });
+            } else if (eventoResource.getStatus() == Resource.Status.LOADING) {
+                mProgressDialog.show();
+
+            } else if (eventoResource.getStatus() == Resource.Status.ERROR) {
+                mProgressDialog.dismiss();
+                Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         Button saveButton = findViewById(R.id.eventSaveButton);
         saveButton.setOnClickListener(this::onSave);
@@ -70,7 +99,7 @@ public class AddEventActivity extends AppCompatActivity {
     private void onSave(View view) {
         mProgressDialog.show();
         try {
-            mViewModel.saveEvent(this, nameText.getText().toString(),
+            mViewModel.saveEvent(this, nameText.getText().toString(), regiao, descricao.getText().toString(), data,
                     newEvent -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this.getApplicationContext(), this.getString(R.string.toast_save_success), Toast.LENGTH_LONG).show();

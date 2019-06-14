@@ -3,6 +3,9 @@ package com.crossover.mobiliza.app.data.local.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.JsonAdapter;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,8 +15,6 @@ public class Evento {
 
     @PrimaryKey
     private Long id;
-
-    private Long idOng;
 
     private List<Long> idsConfirmados = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public class Evento {
 
     private String endereco;
 
-    private Calendar dataRealizacao;
+    private String dataRealizacao;
 
     public Long getId() {
         return id;
@@ -41,14 +42,6 @@ public class Evento {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Long getIdOng() {
-        return idOng;
-    }
-
-    public void setIdOng(Long idOng) {
-        this.idOng = idOng;
     }
 
     public List<Long> getIdsConfirmados() {
@@ -83,11 +76,11 @@ public class Evento {
         this.endereco = endereco;
     }
 
-    public Calendar getDataRealizacao() {
+    public String getDataRealizacao() {
         return dataRealizacao;
     }
 
-    public void setDataRealizacao(Calendar dataRealizacao) {
+    public void setDataRealizacao(String dataRealizacao) {
         this.dataRealizacao = dataRealizacao;
     }
 }

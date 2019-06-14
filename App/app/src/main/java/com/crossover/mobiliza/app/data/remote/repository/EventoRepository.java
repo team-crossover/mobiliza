@@ -80,32 +80,32 @@ public class EventoRepository {
         }.getAsLiveData();
     }
 
-    public LiveData<Resource<List<Evento>>> findAllByOng(Long idOng) {
-        return new NetworkBoundResource<List<Evento>, List<Evento>>() {
-            @Override
-            protected void saveCallResult(List<Evento> item) {
-                if (item != null)
-                    eventoDao.saveAll(item);
-            }
-
-            @NonNull
-            @Override
-            protected LiveData<List<Evento>> loadFromDb() {
-                return eventoDao.findAllByOng(idOng);
-            }
-
-            @NonNull
-            @Override
-            protected Call<List<Evento>> createCall() {
-                return eventoService.findAllByOng(idOng);
-            }
-
-            @Override
-            protected boolean shouldFetch() {
-                return rateLimiter.shouldFetch(null) || super.shouldFetch();
-            }
-        }.getAsLiveData();
-    }
+//    public LiveData<Resource<List<Evento>>> findAllByOng(Long idOng) {
+//        return new NetworkBoundResource<List<Evento>, List<Evento>>() {
+//            @Override
+//            protected void saveCallResult(List<Evento> item) {
+//                if (item != null)
+//                    eventoDao.saveAll(item);
+//            }
+//
+//            @NonNull
+//            @Override
+//            protected LiveData<List<Evento>> loadFromDb() {
+//                return eventoDao.findAllByOng(idOng);
+//            }
+//
+//            @NonNull
+//            @Override
+//            protected Call<List<Evento>> createCall() {
+//                return eventoService.findAllByOng(idOng);
+//            }
+//
+//            @Override
+//            protected boolean shouldFetch() {
+//                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+//            }
+//        }.getAsLiveData();
+//    }
 
     public LiveData<Resource<List<Evento>>> findAllByFinalizado(boolean finalizado) {
         return new NetworkBoundResource<List<Evento>, List<Evento>>() {
