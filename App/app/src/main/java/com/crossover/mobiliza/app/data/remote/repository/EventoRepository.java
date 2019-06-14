@@ -164,7 +164,8 @@ public class EventoRepository {
 
     public void save(final Evento evento, final String googleIdToken, final Consumer<Evento> onSuccess, final Consumer<String> onFailure) {
         AppExecutors.getInstance().network().execute(() -> {
-            AppServices.runCallAsync(eventoService.save(evento, googleIdToken),
+            Call<Evento> call = eventoService.save(evento, googleIdToken);
+            AppServices.runCallAsync(call,
                     newEvento -> {
                         rateLimiter.shouldFetch(null);
                         rateLimiter.shouldFetch(evento.getId());

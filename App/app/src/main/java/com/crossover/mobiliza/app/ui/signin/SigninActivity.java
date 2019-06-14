@@ -13,7 +13,6 @@ import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.remote.service.AppServices;
 import com.crossover.mobiliza.app.data.remote.service.UserService;
-import com.crossover.mobiliza.app.ui.main.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -105,7 +104,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     .getInstance(this)
                     .createService(UserService.class)
                     .findByGoogleTokenId(googleIdToken, asOng);
-            Log.e(TAG, "handleSignInResult: EEEEEEE " + googleIdToken);
+            Log.e(TAG, "handleSignInResult: " + googleIdToken);
             AppServices.runCallAsync(call,
                     // On success
                     user -> {

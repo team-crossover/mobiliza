@@ -3,6 +3,8 @@ package com.crossover.mobiliza.app.data.local.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.crossover.mobiliza.app.data.local.converters.Converters;
+
 import java.util.Calendar;
 
 @Entity(tableName = "voluntarios")
@@ -17,7 +19,7 @@ public class Voluntario {
 
     private String telefone;
 
-    private Calendar dataNascimento;
+    private String dataNascimento;
 
     public Long getId() {
         return id;
@@ -51,11 +53,19 @@ public class Voluntario {
         this.telefone = telefone;
     }
 
-    public Calendar getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Calendar dataNascimento) {
+    public Calendar getDataNascimentoAsCalendar() {
+        return Converters.stringToCalendar(dataNascimento);
+    }
+
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public void setDataNascimento(Calendar dataNascimento) {
+        this.dataNascimento = Converters.calendarToString(dataNascimento);
     }
 }

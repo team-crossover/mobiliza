@@ -23,7 +23,7 @@ public class Converters {
 
     @TypeConverter
     public static Calendar stringToCalendar(String value) {
-        if (value == null)
+        if (value == null || value.isEmpty())
             return null;
         try {
             Date date = dateTimeFormat.parse(value);
@@ -38,7 +38,7 @@ public class Converters {
 
     @TypeConverter
     public static String calendarToString(Calendar date) {
-        return date == null ? null : dateTimeFormat.format(date.getTime());
+        return date == null ? "" : dateTimeFormat.format(date.getTime());
     }
 
     @TypeConverter
