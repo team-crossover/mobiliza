@@ -31,7 +31,6 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     private SignInButton mSignInOngButton;
     private SignInButton mSignInVoluntarioButton;
     private GoogleSignInClient mGoogleSignInClient;
-    private static GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +97,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.setCancelable(false);
         progressDialog.show();
         try {
-            account = completedTask.getResult();
+            GoogleSignInAccount account = completedTask.getResult();
             String googleIdToken = account.getIdToken();
             Call<User> call = AppServices
                     .getInstance(this)
@@ -127,11 +126,4 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    //TODO: Só funciona se recém fizer o sign in
-    public static GoogleSignInAccount getGoogleAccount() {
-       if (account != null) {
-           return account;
-       }
-       return null;
-    }
 }

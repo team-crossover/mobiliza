@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private User mUser;
     private Evento event;
-    private static FloatingActionButton fab;
+    private GoogleSignInAccount googleAccount;
+    //private static FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
         setupToolbar();
         setupAuth();
-        setupFab();
+        //setupFab();
 
         event = new Evento();
 
@@ -62,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
         refreshAuth();
     }
 
-    private void setupFab() {
-        //Create floating action button
-        fab = findViewById(R.id.fabAddEvent);
-        fab.setOnClickListener(v -> Snackbar.make(v, "Alguma ação", Snackbar.LENGTH_SHORT).show());
-    }
+//    private void setupFab() {
+//        //Create floating action button
+//        fab = findViewById(R.id.fabAddEvent);
+//        fab.setOnClickListener(v -> Snackbar.make(v, "Alguma ação", Snackbar.LENGTH_SHORT).show());
+//    }
 
     private void setupLayout() {
         // Create progress dialog
@@ -97,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
         if (mUser == null) {
             menu.add(0, 1, Menu.NONE, R.string.action_signin);
         } else {
-            if(mUser.isLastUsedAsOng()) {
+            if (mUser.isLastUsedAsOng()) {
                 menu.add(0, 2, Menu.NONE, R.string.action_edit_profile);
-                menu.add(0, 4, Menu.NONE, "Novo Evento");
+                menu.add(0, 4, Menu.NONE, R.string.action_new_event);
             }
-            menu.add(0, 5, Menu.NONE, "Informações da conta");
+            menu.add(0, 5, Menu.NONE, R.string.action_google_info);
             menu.add(0, 3, Menu.NONE, R.string.action_signout);
         }
 
@@ -160,21 +161,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void showGoogleAccountInfo() {
         Intent myIntent = new Intent(this, GoogleProfileActivity.class);
-        GoogleSignInAccount account = SigninActivity.getGoogleAccount();
         StringBuilder nome = new StringBuilder();
 
         // Available info only!
-        if (account == null) {
+        if (googleAccount == null) {
             return;
         }
 
-        if (account.getGivenName() != null) {
-            nome.append(account.getGivenName());
+        if (googleAccount.getGivenName() != null) {
+            nome.append(googleAccount.getGivenName());
         }
 
-        if(account.getFamilyName() != null) {
+        if (googleAccount.getFamilyName() != null) {
             nome.append(" ");
-            nome.append(account.getFamilyName());
+            nome.append(googleAccount.getFamilyName());
         }
 
         myIntent.putExtra("googleName", nome.toString());
@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 user -> {
                     Log.e(TAG, "refreshAuth:success userId=" + user.getId());
                     updateUser(user);
+                    googleAccount = account;
                 },
                 // On failure
                 message -> {

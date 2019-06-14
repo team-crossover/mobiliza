@@ -71,7 +71,6 @@ public class AddEventActivity extends AppCompatActivity {
          */
         regiao = RegiaoEnum.CENTRO.getText();
         data = new GregorianCalendar(2019,6,28,13,25);
-        Log.e(TAG, Converters.calendarToString(data));
 
         descricao = findViewById(R.id.eventoDescricaoText);
 
