@@ -18,6 +18,8 @@ public class Evento {
 
     private List<Long> idsConfirmados = new ArrayList<>();
 
+    private Long idOng;
+
     private String nome;
 
     private String descricao;
@@ -26,7 +28,7 @@ public class Evento {
 
     private String endereco;
 
-    private String dataRealizacao;
+    private Calendar dataRealizacao;
 
     public Long getId() {
         return id;
@@ -76,11 +78,19 @@ public class Evento {
         this.endereco = endereco;
     }
 
-    public String getDataRealizacao() {
+    public Calendar getDataRealizacao() {
         return dataRealizacao;
     }
 
-    public void setDataRealizacao(String dataRealizacao) {
+    public void setDataRealizacao(Calendar dataRealizacao) {
         this.dataRealizacao = dataRealizacao;
+    }
+
+    public Long getIdOng() {
+        return idOng;
+    }
+
+    public void setIdOng(Long idOng) {
+        this.idOng = idOng;
     }
 }

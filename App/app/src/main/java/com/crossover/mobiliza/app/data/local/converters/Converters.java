@@ -38,7 +38,7 @@ public class Converters {
 
     @TypeConverter
     public static String calendarToString(Calendar date) {
-        return date == null ? null : dateTimeFormat.format(date);
+        return date == null ? null : dateTimeFormat.format(date.getTime());
     }
 
     @TypeConverter

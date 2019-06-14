@@ -10,6 +10,8 @@ import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
 
+import java.util.Calendar;
+
 public class AddEventViewModel extends ViewModel {
 
     private long mEventId = -1;
@@ -28,7 +30,7 @@ public class AddEventViewModel extends ViewModel {
     }
 
     public void saveEvent(Context context,
-                          String nome, String regiao, String descricao, String data,
+                          String nome, String regiao, String descricao, Calendar data,
                           Consumer<Evento> onSuccess,
                           Consumer<String> onFailure) {
 

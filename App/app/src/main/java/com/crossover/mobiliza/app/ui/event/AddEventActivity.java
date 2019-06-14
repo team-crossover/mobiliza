@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crossover.mobiliza.app.R;
+import com.crossover.mobiliza.app.data.local.converters.Converters;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.enums.RegiaoEnum;
 import com.crossover.mobiliza.app.data.remote.Resource;
@@ -23,6 +24,8 @@ import com.crossover.mobiliza.app.data.remote.Resource;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText nameText;
     private EditText descricao;
     private String regiao;
-    private String data;
+    private Calendar data;
 
     /**
      * TODO: inserir captação de dados para os outros atributos de evento: data, endereço, região(possui enum). Olhar a entidade evento.
@@ -67,9 +70,9 @@ public class AddEventActivity extends AppCompatActivity {
          * TODO: regiao, dataRealizacao e descricao (O QUE ESTÁ AQUI É TEMPORÁRIO, PQ NÃO PODE SER NULO)
          */
         regiao = RegiaoEnum.CENTRO.getText();
-        LocalDateTime time = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        data = time.format(formatter);
+        data = new GregorianCalendar(2019,6,28,13,25);
+        Log.e(TAG, Converters.calendarToString(data));
+
         descricao = findViewById(R.id.eventoDescricaoText);
 
         mViewModel.getEvento(this).observe(this, eventoResource -> {
@@ -77,7 +80,7 @@ public class AddEventActivity extends AppCompatActivity {
                 Evento evt = eventoResource.getData();
                 mProgressDialog.dismiss();
                 nameText.setVisibility(View.VISIBLE);
-
+                // Set the fields to contain  the event's information
                 nameText.setText(evt.getNome());
 
             } else if (eventoResource.getStatus() == Resource.Status.LOADING) {

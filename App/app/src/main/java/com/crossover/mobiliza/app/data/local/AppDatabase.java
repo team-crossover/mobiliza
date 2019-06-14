@@ -22,7 +22,7 @@ import com.crossover.mobiliza.app.data.local.entity.Voluntario;
         Evento.class,
         Ong.class,
         Voluntario.class,
-        User.class}, version = 6, exportSchema = false)
+        User.class}, version = 8, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
