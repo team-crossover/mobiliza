@@ -40,7 +40,7 @@ public class MainOngsFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main_eventos, container, false);
+        View root = inflater.inflate(R.layout.fragment_main_ongs, container, false);
 
         //...?
 
