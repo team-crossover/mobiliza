@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
@@ -22,6 +24,8 @@ public class MainEventsFragment extends Fragment {
 
     private MainEventsViewModel mainEventsViewModel;
 
+    private RecyclerView recyclerView;
+
     public static MainEventsFragment newInstance() {
         MainEventsFragment fragment = new MainEventsFragment();
         Bundle bundle = new Bundle();
@@ -34,6 +38,7 @@ public class MainEventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainEventsViewModel = ViewModelProviders.of(this).get(MainEventsViewModel.class);
+
     }
 
     @Override
@@ -51,8 +56,22 @@ public class MainEventsFragment extends Fragment {
 
         // TODO: Parar de usar esse TextView ridículo e usar uma RecyclerView decente
         // TODO: Adicionar um "swipe to refresh"
+        getAllEventos();
 
-        // Atualiza a lista de ongs
+        //recyclerView = recyclerView.findViewById(R.id.recyclerEvents);
+
+        //Adapter Config
+
+        //RecyclerView Config
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+       // recyclerView.setHasFixedSize(true);
+        //recyclerView.setAdapter();
+
+
+    }
+
+    private void getAllEventos() {
+        // Atualiza a lista de eventos
         final TextView textView = getView().findViewById(R.id.test_label);
         mainEventsViewModel.findAllEventos(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {

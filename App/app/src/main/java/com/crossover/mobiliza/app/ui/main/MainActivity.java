@@ -219,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, task -> updateUser(null));
+        Toast.makeText(this, "Você foi deslogado", Toast.LENGTH_LONG).show();
     }
 
     private void revokeAccess() {

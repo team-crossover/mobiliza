@@ -110,6 +110,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         progressDialog.dismiss();
                         Log.i(TAG, "handleSignInResult:success userId=" + user.getId());
                         this.finish();
+                        Toast.makeText(this, "Bem-vindo " + account.getGivenName(), Toast.LENGTH_LONG).show();
                     },
                     // On failure
                     message -> {
