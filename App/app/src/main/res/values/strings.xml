@@ -24,4 +24,21 @@
     <string name="toast_save_success">Dados salvos</string>
     <string name="action_new_event">Novo evento</string>
     <string name="action_google_info">Informações da conta</string>
+    <string-array name="categories_array">
+        <item name="animais">Animais</item>
+        <item name="educacao">Educação</item>
+        <item name="esporte">Esporte</item>
+        <item name="humanitario">Humanitário</item>
+        <item name="mambiente">Meio Ambiente</item>
+        <item name="turismo">Turismo</item>
+    </string-array>
+    <string-array name="regions_array">
+        <item name="centro">Centro</item>
+        <item name="leste">Leste</item>
+        <item name="noroeste">Noroeste</item>
+        <item name="norte">Norte</item>
+        <item name="oeste">Oeste</item>
+        <item name="sudoeste">Sudoeste</item>
+        <item name="sul">Sul</item>
+    </string-array>
 </resources>

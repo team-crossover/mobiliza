@@ -31,6 +31,10 @@ public class ProfileOngViewModel extends ViewModel {
                         String nome,
                         String descricao,
                         String categoria,
+                        String email,
+                        String endereco,
+                        String regiao,
+                        String telefone,
                         Consumer<Ong> onSuccess,
                         Consumer<String> onFailure) {
         Ong ong = new Ong();
@@ -38,6 +42,10 @@ public class ProfileOngViewModel extends ViewModel {
         ong.setNome(nome);
         ong.setCategoria(categoria);
         ong.setDescricao(descricao);
+        ong.setEmail(email);
+        ong.setEndereco(endereco);
+        ong.setRegiao(regiao);
+        ong.setTelefone(telefone);
 
         OngRepository.getInstance(context).save(ong, mGoogleIdToken, onSuccess, onFailure);
     }

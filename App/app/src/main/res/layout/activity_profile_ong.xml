@@ -6,85 +6,199 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileOngActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/ongNameText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Nome" />
-
-        <EditText
-            android:id="@+id/ongDescricaoText"
-            android:layout_width="match_parent"
-            android:layout_height="159dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:text="Descrição" />
-
-        <TextView
-            android:id="@+id/textViewCategorias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Categoria"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/rgCategoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/rbAnimais"
+            <EditText
+                android:id="@+id/ongNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Animais" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="Nome" />
 
-            <RadioButton
-                android:id="@+id/rbEducacao"
+            <EditText
+                android:id="@+id/ongDescricaoText"
+                android:layout_width="match_parent"
+                android:layout_height="159dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="Descrição" />
+
+            <TextView
+                android:id="@+id/textViewCategorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Educação" />
+                android:text=" Categoria"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/rbEsporte"
+            <Spinner
+                android:id="@+id/spCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<RadioGroup-->
+                <!--android:id="@+id/rgCategoria"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbAnimais"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Animais" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbEducacao"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Educação" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbEsporte"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Esporte" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbHumanitario"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Humanitário" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbMAmbiente"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Meio Ambiente" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbTurismo"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Turismo" />-->
+            <!--</RadioGroup>-->
+
+            <EditText
+                android:id="@+id/ongEmailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Esporte" />
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textEmailAddress"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="E-mail" />
 
-            <RadioButton
-                android:id="@+id/rbHumanitario"
+            <EditText
+                android:id="@+id/ongEnderecoText"
+                android:layout_width="match_parent"
+                android:layout_height="159dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="Endereço" />
+
+            <TextView
+                android:id="@+id/textViewRegioes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Humanitário" />
+                android:text=" Região"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/rbMAmbiente"
+            <Spinner
+                android:id="@+id/spRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<RadioGroup-->
+                <!--android:id="@+id/rgRegiao"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbCentro"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Centro" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbLeste"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Leste" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbNoroeste"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Noroeste" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbNorte"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Norte" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbOeste"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Oeste" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbSudoeste"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Sudoeste" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rbSul"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Suldoeste" />-->
+            <!--</RadioGroup>-->
+
+            <EditText
+                android:id="@+id/ongTelefoneText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meio Ambiente" />
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="phone"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="Telefone" />
 
-            <RadioButton
-                android:id="@+id/rbTurismo"
+            <Button
+                android:id="@+id/ongSaveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Turismo" />
-        </RadioGroup>
+                android:text="@string/button_confirm" />
 
-        <Button
-            android:id="@+id/ongSaveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_confirm" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
