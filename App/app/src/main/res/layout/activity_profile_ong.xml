@@ -49,7 +49,7 @@
             <Spinner
                 android:id="@+id/spCategoria"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="44dp" />
 
             <!--<RadioGroup-->
                 <!--android:id="@+id/rgCategoria"-->
@@ -94,6 +94,14 @@
                     <!--android:text="Turismo" />-->
             <!--</RadioGroup>-->
 
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" E-mail"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp" />
+
             <EditText
                 android:id="@+id/ongEmailText"
                 android:layout_width="match_parent"
@@ -105,6 +113,14 @@
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:text="E-mail" />
+
+            <TextView
+                android:id="@+id/textViewEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Endereço"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/ongEnderecoText"
@@ -129,7 +145,7 @@
             <Spinner
                 android:id="@+id/spRegiao"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="44dp" />
 
             <!--<RadioGroup-->
                 <!--android:id="@+id/rgRegiao"-->
@@ -179,6 +195,14 @@
                     <!--android:layout_height="wrap_content"-->
                     <!--android:text="Suldoeste" />-->
             <!--</RadioGroup>-->
+
+            <TextView
+                android:id="@+id/textViewTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Telefone"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/ongTelefoneText"
