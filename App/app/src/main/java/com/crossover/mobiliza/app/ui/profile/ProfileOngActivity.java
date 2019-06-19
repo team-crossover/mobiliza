@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,20 +29,35 @@ public class ProfileOngActivity extends AppCompatActivity {
     private ProfileOngViewModel mViewModel;
     private EditText nameText;
     private EditText descText;
-    private RadioGroup rgCategoria;
     private String categoria;
     private EditText emailText;
     private EditText enderecoText;
-    private RadioGroup rgRegiao;
     private String regiao;
     private EditText telefoneText;
 
     private Spinner categoriaSpinner;
     private Spinner regiaoSpinner;
 
+    private String[] categoriasArray = new String[] {
+            CategoriaEnum.ANIMAIS.getText(),
+            CategoriaEnum.EDUCACAO.getText(),
+            CategoriaEnum.ESPORTE.getText(),
+            CategoriaEnum.HUMANITARIO.getText(),
+            CategoriaEnum.MEIO_AMBIENTE.getText(),
+            CategoriaEnum.TURISMO.getText()
+    };
+
+    private String[] regioesArray = new String[] {
+            RegiaoEnum.CENTRO.getText(),
+            RegiaoEnum.LESTE.getText(),
+            RegiaoEnum.NOROESTE.getText(),
+            RegiaoEnum.NORTE.getText(),
+            RegiaoEnum.OESTE.getText(),
+            RegiaoEnum.SUDOESTE.getText(),
+            RegiaoEnum.SUL.getText()
+    };
+
     /**
-     * TODO: inserir captação de dados para os outros atributos de ong: telefone, e-mail, endereço e região(possui enum). Olhar a entidade Ong.
-     * - Para economizar espaço, trocar o radio button dos enums por um spinner (similar ao dropdown).
      * Vai ficar faltando: validação de dados.
      */
 
@@ -69,26 +85,49 @@ public class ProfileOngActivity extends AppCompatActivity {
         descText = findViewById(R.id.ongDescricaoText);
 
         categoriaSpinner = findViewById(R.id.spCategoria);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, categoriasArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriaSpinner.setAdapter(adapter);
 
-//        rgCategoria = findViewById(R.id.rgCategoria);
-//        categoria = new String();
-//        verifyCategoria();
+        categoriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoria = new String();
+                categoria = categoriaSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
         emailText = findViewById(R.id.ongEmailText);
         enderecoText = findViewById(R.id.ongEnderecoText);
 
         regiaoSpinner = findViewById(R.id.spRegiao);
-        ArrayAdapter<CharSequence> adapterRegiao = ArrayAdapter.createFromResource(this,
-                R.array.regions_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapterRegiao =new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, regioesArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regiaoSpinner.setAdapter(adapterRegiao);
 
-//        rgRegiao = findViewById(R.id.rgRegiao);
-//        regiao = new String();
-//        verifyRegiao();
+        regiaoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                regiao = new String();
+                regiao = regiaoSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         telefoneText = findViewById(R.id.ongTelefoneText);
 
         mViewModel.getOng(this).observe(this, ongResource -> {
@@ -105,15 +144,19 @@ public class ProfileOngActivity extends AppCompatActivity {
                 nameText.setText(ong.getNome());
                 descText.setText(ong.getDescricao());
 
-                categoria = categoriaSpinner.getSelectedItem().toString();
-//                categoria = ong.getCategoria();
-//                setCategoria();
+                int indexCategoria = verifySpinnerElement(categoriasArray, ong.getCategoria());
+                if (indexCategoria != -1) {
+                    categoriaSpinner.setSelection(indexCategoria);
+                }
+
                 emailText.setText(ong.getEmail());
                 enderecoText.setText(ong.getEndereco());
 
-                regiao = regiaoSpinner.getSelectedItem().toString();
-//                regiao = ong.getRegiao();
-//                setRegiao();
+                int indexRegiao = verifySpinnerElement(regioesArray, ong.getRegiao());
+                if (indexRegiao != -1) {
+                    regiaoSpinner.setSelection(indexRegiao);
+                }
+
                 telefoneText.setText(ong.getTelefone());
 
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
@@ -162,105 +205,24 @@ public class ProfileOngActivity extends AppCompatActivity {
         }
     }
 
-//    private void verifyCategoria() {
-//        rgCategoria.setOnCheckedChangeListener((group, checkedId) -> {
-//
-//            switch (checkedId) {
-//                case R.id.rbAnimais:
-//                    categoria = CategoriaEnum.ANIMAIS.getText();
-//                    break;
-//                case R.id.rbEducacao:
-//                    categoria = CategoriaEnum.EDUCACAO.getText();
-//                    break;
-//                case R.id.rbEsporte:
-//                    categoria = CategoriaEnum.ESPORTE.getText();
-//                    break;
-//                case R.id.rbHumanitario:
-//                    categoria = CategoriaEnum.HUMANITARIO.getText();
-//                    break;
-//                case R.id.rbMAmbiente:
-//                    categoria = CategoriaEnum.MEIO_AMBIENTE.getText();
-//                    break;
-//                case R.id.rbTurismo:
-//                    categoria = CategoriaEnum.TURISMO.getText();
-//                    break;
-//                default:
-//                    categoria = null;
-//            }
-//        });
-//    }
+    private int verifySpinnerElement(String[] array, String element) {
+        int indexArray = 0;
 
-//    private void setCategoria() {
-//
-//        if (categoria.equals(CategoriaEnum.ANIMAIS.getText())) {
-//            rgCategoria.check(R.id.rbAnimais);
-//
-//        } else if (categoria.equals(CategoriaEnum.EDUCACAO.getText())) {
-//            rgCategoria.check(R.id.rbEducacao);
-//
-//        } else if (categoria.equals(CategoriaEnum.ESPORTE.getText())) {
-//            rgCategoria.check(R.id.rbEducacao);
-//
-//        } else if (categoria.equals(CategoriaEnum.HUMANITARIO.getText())) {
-//            rgCategoria.check(R.id.rbHumanitario);
-//
-//        } else if (categoria.equals(CategoriaEnum.MEIO_AMBIENTE.getText())) {
-//            rgCategoria.check(R.id.rbMAmbiente);
-//
-//        } else if (categoria.equals(CategoriaEnum.TURISMO.getText())) {
-//            rgCategoria.check(R.id.rbTurismo);
-//        } else { }
-//
-//    }
+        if (array == null) {
+            return -1;
+        }
 
-//    private void setRegiao() {
-//
-//        if (regiao.equals(RegiaoEnum.CENTRO.getText())) {
-//            rgRegiao.check(R.id.rbCentro);
-//        } else if (regiao.equals(RegiaoEnum.LESTE.getText())) {
-//            rgRegiao.check(R.id.rbLeste);
-//        } else if (regiao.equals(RegiaoEnum.NOROESTE.getText())) {
-//            rgRegiao.check(R.id.rbNoroeste);
-//        } else if (regiao.equals(RegiaoEnum.NORTE.getText())) {
-//            rgRegiao.check(R.id.rbNorte);
-//        } else if (regiao.equals(RegiaoEnum.OESTE.getText())) {
-//            rgRegiao.check(R.id.rbOeste);
-//        } else if (regiao.equals(RegiaoEnum.SUDOESTE.getText())) {
-//            rgRegiao.check(R.id.rbSudoeste);
-//        } else if (regiao.equals(RegiaoEnum.SUL.getText())) {
-//            rgRegiao.check(R.id.rbSul);
-//        } else {}
-//
-//    }
-//
-//    private void verifyRegiao() {
-//        rgRegiao.setOnCheckedChangeListener((group, checkedId) -> {
-//            switch (checkedId) {
-//                case R.id.rbCentro:
-//                    regiao = RegiaoEnum.CENTRO.getText();
-//                    break;
-//                case R.id.rbLeste:
-//                    regiao = RegiaoEnum.LESTE.getText();
-//                    break;
-//                case R.id.rbNoroeste:
-//                    regiao = RegiaoEnum.NOROESTE.getText();
-//                    break;
-//                case R.id.rbNorte:
-//                    regiao = RegiaoEnum.NORTE.getText();
-//                    break;
-//                case R.id.rbOeste:
-//                    regiao = RegiaoEnum.OESTE.getText();
-//                    break;
-//                case R.id.rbSudoeste:
-//                    regiao = RegiaoEnum.SUDOESTE.getText();
-//                    break;
-//                case R.id.rbSul:
-//                    regiao = RegiaoEnum.SUL.getText();
-//                    break;
-//                default:
-//                    regiao = null;
-//            }
-//        });
-//    }
+        int len = array.length;
+        while (indexArray < len) {
+            if (array[indexArray].equals(element)) {
+                return indexArray;
+            } else {
+                indexArray++;
+            }
+        }
+
+        return -1;
+    }
+
 
 }
