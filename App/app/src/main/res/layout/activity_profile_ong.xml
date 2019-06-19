@@ -15,6 +15,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Nome"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
             <EditText
                 android:id="@+id/ongNameText"
                 android:layout_width="match_parent"
@@ -25,6 +34,15 @@
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:text="Nome" />
+
+            <TextView
+                android:id="@+id/textViewDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Descrição"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/ongDescricaoText"
@@ -44,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Categoria"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <Spinner
@@ -51,55 +70,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp" />
 
-            <!--<RadioGroup-->
-                <!--android:id="@+id/rgCategoria"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbAnimais"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Animais" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbEducacao"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Educação" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbEsporte"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Esporte" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbHumanitario"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Humanitário" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbMAmbiente"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Meio Ambiente" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbTurismo"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Turismo" />-->
-            <!--</RadioGroup>-->
-
             <TextView
                 android:id="@+id/textViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" E-mail"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <EditText
@@ -120,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Endereço"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <EditText
@@ -140,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Região"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <Spinner
@@ -147,54 +126,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp" />
 
-            <!--<RadioGroup-->
-                <!--android:id="@+id/rgRegiao"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbCentro"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Centro" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbLeste"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Leste" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbNoroeste"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Noroeste" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbNorte"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Norte" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbOeste"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Oeste" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbSudoeste"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Sudoeste" />-->
-
-                <!--<RadioButton-->
-                    <!--android:id="@+id/rbSul"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Suldoeste" />-->
-            <!--</RadioGroup>-->
 
             <TextView
                 android:id="@+id/textViewTelefone"
@@ -202,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Telefone"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <EditText
