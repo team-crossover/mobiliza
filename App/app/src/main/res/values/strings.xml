@@ -24,4 +24,5 @@
     <string name="toast_save_success">Dados salvos</string>
     <string name="action_new_event">Novo evento</string>
     <string name="action_google_info">Informações da conta</string>
+    <string name="profile_picture">Profile Picture</string>
 </resources>

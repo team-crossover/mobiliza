@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private User mUser;
     private Evento event;
     private GoogleSignInAccount googleAccount;
-    //private static FloatingActionButton fab;
+    private static FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
         setupToolbar();
         setupAuth();
-        //setupFab();
+        setupFab();
 
         event = new Evento();
 
@@ -63,11 +63,12 @@ public class MainActivity extends AppCompatActivity {
         refreshAuth();
     }
 
-//    private void setupFab() {
-//        //Create floating action button
-//        fab = findViewById(R.id.fabAddEvent);
-//        fab.setOnClickListener(v -> Snackbar.make(v, "Alguma ação", Snackbar.LENGTH_SHORT).show());
-//    }
+    private void setupFab() {
+        //Create floating action button
+        fab = findViewById(R.id.fabAddEvent);
+        fab.setOnClickListener(v -> Snackbar.make(v, "Alguma ação", Snackbar.LENGTH_SHORT).show());
+        fab.hide();
+    }
 
     private void setupLayout() {
         // Create progress dialog
@@ -177,6 +178,20 @@ public class MainActivity extends AppCompatActivity {
             nome.append(googleAccount.getFamilyName());
         }
 
+        if (googleAccount.getEmail() != null) {
+            myIntent.putExtra("googleEmail", googleAccount.getEmail());
+        }
+
+        if (googleAccount.getPhotoUrl() != null) {
+            myIntent.putExtra("googlePicture", googleAccount.getPhotoUrl().toString());
+        }
+
+        if (mUser.isLastUsedAsOng()) {
+            myIntent.putExtra("userType", "Conta tipo ONG");
+        } else {
+            myIntent.putExtra("userType", "Conta tipo Voluntário");
+        }
+
         myIntent.putExtra("googleName", nome.toString());
         this.startActivity(myIntent);
     }
@@ -216,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void signOut() {
+    public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, task -> updateUser(null));
         Toast.makeText(this, "Você foi deslogado", Toast.LENGTH_LONG).show();

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
+import com.crossover.mobiliza.app.data.remote.repository.OngRepository;
 
 import java.util.Calendar;
 
