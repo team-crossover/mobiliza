@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.retrieve.GoogleProfileActivity"></activity>
+        <activity android:name=".ui.profile.GoogleProfileActivity"></activity>
         <activity android:name=".ui.event.AddEventActivity" />
         <activity
             android:name=".ui.main.MainActivity"

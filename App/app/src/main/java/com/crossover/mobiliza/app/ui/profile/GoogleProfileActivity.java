@@ -1,4 +1,4 @@
-package com.crossover.mobiliza.app.ui.retrieve;
+package com.crossover.mobiliza.app.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -4,16 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.ui.main.adapter.AdapterEvents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,33 +59,35 @@ public class MainEventsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // TODO: Parar de usar esse TextView ridículo e usar uma RecyclerView decente
         // TODO: Adicionar um "swipe to refresh"
-        getAllEventos();
+        // getAllEventos();
 
-        //recyclerView = recyclerView.findViewById(R.id.recyclerEvents);
+        recyclerView = getView().findViewById(R.id.recyclerEvents);
 
-        //Adapter Config
+        // Adapter Config
+        AdapterEvents adapterEvents = new AdapterEvents(getAllEventos());
 
-        //RecyclerView Config
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-       // recyclerView.setHasFixedSize(true);
-        //recyclerView.setAdapter();
+        // RecyclerView Config
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter(adapterEvents);
 
 
     }
 
-    private void getAllEventos() {
-        // Atualiza a lista de eventos
-        final TextView textView = getView().findViewById(R.id.test_label);
+    private List<Evento> getAllEventos() {
+        List<Evento> eventos = new ArrayList<>();
+
         mainEventsViewModel.findAllEventos(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {
-                StringBuilder sb = new StringBuilder();
                 for (Evento evt : listResource.getData()) {
-                    sb.append(evt.getNome()+"\n");
+                    eventos.add(evt);
                 }
-                textView.setText(sb.toString());
             }
         });
+
+        return eventos;
     }
 }

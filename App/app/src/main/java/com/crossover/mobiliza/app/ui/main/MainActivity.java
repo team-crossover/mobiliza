@@ -20,7 +20,7 @@ import com.crossover.mobiliza.app.data.remote.service.UserService;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileVoluntarioActivity;
-import com.crossover.mobiliza.app.ui.retrieve.GoogleProfileActivity;
+import com.crossover.mobiliza.app.ui.profile.GoogleProfileActivity;
 import com.crossover.mobiliza.app.ui.signin.SigninActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
