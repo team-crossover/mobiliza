@@ -28,8 +28,6 @@ public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewH
         View itemLista = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_events_list, parent, false);
 
-
-
         return new EventViewHolder(itemLista);
     }
 

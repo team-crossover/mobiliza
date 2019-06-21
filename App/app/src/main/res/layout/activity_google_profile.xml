@@ -25,8 +25,12 @@
         <ImageView
             android:id="@+id/googlePicture"
             android:layout_width="match_parent"
-            android:layout_height="233dp"
+            android:layout_height="@android:dimen/thumbnail_height"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fab_margin" />
 
         <TextView
             android:id="@+id/googleNome"
@@ -36,6 +40,10 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/appbar_padding_top" />
+
         <TextView
             android:id="@+id/googleEmail"
             android:layout_width="match_parent"
@@ -43,6 +51,10 @@
             android:text="email"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/appbar_padding_top" />
 
         <TextView
             android:id="@+id/accountType"
@@ -52,14 +64,18 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fab_margin" />
+
         <Button
             android:id="@+id/deleteButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#c60909"
-            android:textColor="#ffffff"
-            android:text="Deletar conta" />
+            android:text="Deletar conta"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,34 +60,27 @@ public class MainEventsFragment extends Fragment {
         super.onStart();
 
         // TODO: Adicionar um "swipe to refresh"
-        // getAllEventos();
-
-        recyclerView = getView().findViewById(R.id.recyclerEvents);
-
-        // Adapter Config
-        AdapterEvents adapterEvents = new AdapterEvents(getAllEventos());
-
-        // RecyclerView Config
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
-        recyclerView.setAdapter(adapterEvents);
-
-
-    }
-
-    private List<Evento> getAllEventos() {
-        List<Evento> eventos = new ArrayList<>();
-
         mainEventsViewModel.findAllEventos(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {
+                List<Evento> eventos = new ArrayList<>();
                 for (Evento evt : listResource.getData()) {
                     eventos.add(evt);
                 }
+
+                recyclerView = getView().findViewById(R.id.recyclerEvents);
+
+                // Adapter Config
+                AdapterEvents adapterEvents = new AdapterEvents(eventos);
+
+                // RecyclerView Config
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+                recyclerView.setAdapter(adapterEvents);
+
             }
         });
 
-        return eventos;
     }
 }
