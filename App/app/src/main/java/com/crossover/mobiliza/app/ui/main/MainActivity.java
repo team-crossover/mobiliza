@@ -18,6 +18,7 @@ import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.remote.service.AppServices;
 import com.crossover.mobiliza.app.data.remote.service.UserService;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
+import com.crossover.mobiliza.app.ui.main.adapters.SectionsPagerAdapter;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileVoluntarioActivity;
 import com.crossover.mobiliza.app.ui.profile.GoogleProfileActivity;
@@ -38,10 +39,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
     private GoogleSignInClient mGoogleSignInClient;
-    private User mUser;
+    private static User mUser;
     private Evento event;
     private GoogleSignInAccount googleAccount;
     private static FloatingActionButton fab;
+
+    public static User getUser(){
+        if (mUser != null) {
+            return mUser;
+        } else {
+            return null;
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setupFab();
 
         event = new Evento();
+
 
     }
 

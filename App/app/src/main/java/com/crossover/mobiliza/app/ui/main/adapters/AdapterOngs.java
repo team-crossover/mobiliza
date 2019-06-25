@@ -1,4 +1,4 @@
-package com.crossover.mobiliza.app.ui.main.adapter;
+package com.crossover.mobiliza.app.ui.main.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

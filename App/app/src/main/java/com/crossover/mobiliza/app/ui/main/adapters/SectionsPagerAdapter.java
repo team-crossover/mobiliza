@@ -1,4 +1,4 @@
-package com.crossover.mobiliza.app.ui.main;
+package com.crossover.mobiliza.app.ui.main.adapters;
 
 import android.content.Context;
 
@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.crossover.mobiliza.app.R;
+import com.crossover.mobiliza.app.ui.main.MainEventsFragment;
+import com.crossover.mobiliza.app.ui.main.MainOngsFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

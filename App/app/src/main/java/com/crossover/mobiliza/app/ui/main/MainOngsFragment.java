@@ -1,9 +1,11 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,8 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
-import com.crossover.mobiliza.app.ui.main.adapter.AdapterEvents;
-import com.crossover.mobiliza.app.ui.main.adapter.AdapterOngs;
+import com.crossover.mobiliza.app.ui.detailed.DetailedOngActivity;
+import com.crossover.mobiliza.app.ui.main.adapters.AdapterOngs;
+import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +82,27 @@ public class MainOngsFragment extends Fragment {
                 recyclerView.setHasFixedSize(true);
                 recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
                 recyclerView.setAdapter(adapterOngs);
+
+                // Click event
+                recyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(
+                                getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Ong ong = ongs.get(position);
+                                Intent myIntent = new Intent(getContext(), DetailedOngActivity.class);
+                                myIntent.putExtra("idOng", ong.getId());
+                                getContext().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) { }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
+                        }
+                        )
+                );
 
             }
         });

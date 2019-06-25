@@ -13,7 +13,6 @@ import java.util.List;
 
 public class MainOngsViewModel extends ViewModel {
 
-    // TODO: Adicionar paginação
     public LiveData<Resource<List<Ong>>> findAllOngs(Context context) {
         return OngRepository.getInstance(context).findAll();
     }

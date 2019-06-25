@@ -1,10 +1,13 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,7 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
-import com.crossover.mobiliza.app.ui.main.adapter.AdapterEvents;
+import com.crossover.mobiliza.app.data.local.entity.User;
+import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
+import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
+import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +84,41 @@ public class MainEventsFragment extends Fragment {
                 recyclerView.setHasFixedSize(true);
                 recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
                 recyclerView.setAdapter(adapterEvents);
+
+                // Click event
+                recyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(
+                                getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                User user = mainEventsViewModel.getCurrentUser();
+                                Evento evento = eventos.get(position);
+                                Intent myIntent = new Intent(getContext(), DetailedEventActivity.class);
+
+                                if (user != null) {
+                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getId())){
+                                        myIntent.putExtra("idOwner", user.getId());
+                                    } else {
+                                        myIntent.putExtra("idVoluntario", user.getIdVoluntario());
+                                    }
+                                    myIntent.putExtra("googleIdToken", user.getGoogleIdToken());
+                                }
+
+                                myIntent.putExtra("idEvent", evento.getId());
+
+                                getContext().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
+                        }
+                        )
+                );
 
             }
         });
