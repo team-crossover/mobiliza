@@ -49,13 +49,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewXXX"
-                android:layout_width="wrap_content"
-                android:layout_height="@android:dimen/notification_large_icon_height"
-                android:layout_weight="1"
-                android:text="TODO: Confirmar presença" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/bConfirmPresence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Confirmar presença" />
+
+                <Button
+                    android:id="@+id/bRemovePresence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_light"
+                    android:text="Remover presença" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -63,5 +75,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="nome evento" />
+
+        <TextView
+            android:id="@+id/detailEventConfirmados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantidade de confirmados" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

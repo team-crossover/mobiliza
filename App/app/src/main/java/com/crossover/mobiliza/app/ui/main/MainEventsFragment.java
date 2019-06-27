@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class MainEventsFragment extends Fragment {
     private static final String TAG = MainEventsFragment.class.getSimpleName();
 
     private MainEventsViewModel mainEventsViewModel;
-
+    private ProgressDialog mProgressDialog;
     private RecyclerView recyclerView;
 
     public static MainEventsFragment newInstance() {
@@ -49,6 +50,9 @@ public class MainEventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainEventsViewModel = ViewModelProviders.of(this).get(MainEventsViewModel.class);
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setMessage(getString(R.string.progress_message));
+        mProgressDialog.setCancelable(false);
 
     }
 
@@ -68,6 +72,7 @@ public class MainEventsFragment extends Fragment {
         // TODO: Adicionar um "swipe to refresh"
         mainEventsViewModel.findAllEventos(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {
+                mProgressDialog.show();
                 List<Evento> eventos = new ArrayList<>();
                 for (Evento evt : listResource.getData()) {
                     eventos.add(evt);
@@ -96,6 +101,7 @@ public class MainEventsFragment extends Fragment {
                                 Intent myIntent = new Intent(getContext(), DetailedEventActivity.class);
 
                                 if (user != null) {
+                                    Toast.makeText(getContext(), "meuId: " + user.getId(), Toast.LENGTH_SHORT).show();
                                     if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getId())){
                                         myIntent.putExtra("idOwner", user.getId());
                                     } else {
@@ -119,7 +125,7 @@ public class MainEventsFragment extends Fragment {
                         }
                         )
                 );
-
+                mProgressDialog.dismiss();
             }
         });
 

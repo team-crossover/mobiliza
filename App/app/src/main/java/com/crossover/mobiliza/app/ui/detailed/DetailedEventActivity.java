@@ -25,11 +25,17 @@ public class DetailedEventActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private DetailedEventViewModel mViewModel;
     private TextView nomeEvento;
+    private TextView qntConfirmados;
     private LinearLayout ownerOptions;
     private LinearLayout volunteerOptions;
+    private Button bConfirmPresenca;
+    private Button bRemovePresenca;
 
     private Long eventId;
+    private Evento thisEvento;
     private String googleIdToken;
+    private Long idOwner;
+    private Long idVoluntario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,6 @@ public class DetailedEventActivity extends AppCompatActivity {
             googleIdToken = "";
         }
 
-
         mViewModel = ViewModelProviders.of(this).get(DetailedEventViewModel.class);
         mViewModel.setEventoId(eventId);
         mViewModel.setGoogleIdToken(googleIdToken);
@@ -57,16 +62,19 @@ public class DetailedEventActivity extends AppCompatActivity {
         nomeEvento = findViewById(R.id.detailEventName);
         ownerOptions = findViewById(R.id.ongOwnerOptions);
         volunteerOptions = findViewById(R.id.volunteerOptions);
+        bConfirmPresenca = findViewById(R.id.bConfirmPresence);
+        bRemovePresenca = findViewById(R.id.bRemovePresence);
+        qntConfirmados = findViewById(R.id.detailEventConfirmados);
 
         if (intent.hasExtra("idOwner")) {
-            Long idOwner = intent.getLongExtra("idOwner", -1);
+            idOwner = intent.getLongExtra("idOwner", -1);
             ownerOptions.setVisibility(LinearLayout.VISIBLE);
         } else {
             ownerOptions.setVisibility(LinearLayout.GONE);
         }
 
         if (intent.hasExtra("idVoluntario")) {
-            Long idVoluntario = intent.getLongExtra("idVoluntario", -1);
+            idVoluntario = intent.getLongExtra("idVoluntario", -1);
             volunteerOptions.setVisibility(LinearLayout.VISIBLE);
         } else {
             volunteerOptions.setVisibility(LinearLayout.GONE);
@@ -79,6 +87,26 @@ public class DetailedEventActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
                 nomeEvento.setVisibility(View.VISIBLE);
                 nomeEvento.setText(evt.getNome());
+
+                if (evt.getIdsConfirmados() != null) {
+                    qntConfirmados.setVisibility(View.VISIBLE);
+                    //qntConfirmados.setText("Quantidade de confirmados: " + evt.getIdsConfirmados().size());
+                    qntConfirmados.setText("idDonoEvento: " + evt.getIdOng() + " - idDessa Ong: " + idOwner );
+                }
+
+                // Presença
+                if (idVoluntario != null) {
+                    if (evt.getIdsConfirmados().contains(idVoluntario)) {
+                        bConfirmPresenca.setVisibility(View.GONE);
+                        bRemovePresenca.setVisibility(View.VISIBLE);
+                    } else {
+                        bConfirmPresenca.setVisibility(View.VISIBLE);
+                        bRemovePresenca.setVisibility(View.GONE);
+                    }
+                    thisEvento = evt;
+                    bConfirmPresenca.setOnClickListener(this::onConfirmPresence);
+                    bRemovePresenca.setOnClickListener(this::onRemovePresence);
+                }
 
                 /**
                  * TODO: Demais informações do evento
@@ -99,6 +127,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         editarEvento.setOnClickListener(this::onEdit);
         deletarEvento.setOnClickListener(this::onDelete);
 
+
         Log.i(TAG, "onCreate: ");
     }
 
@@ -113,5 +142,57 @@ public class DetailedEventActivity extends AppCompatActivity {
     private void onDelete(View view) {
         //mProgressDialog.show();
         Toast.makeText(this, "Deletar Evento", Toast.LENGTH_SHORT).show();
+    }
+
+    private void onConfirmPresence(View view) {
+        thisEvento.getIdsConfirmados().add(idVoluntario);
+
+        mProgressDialog.show();
+        try {
+            mViewModel.saveEvent(this, thisEvento,
+                    success -> {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, "Presença confirmada!", Toast.LENGTH_SHORT).show();
+                        bConfirmPresenca.setVisibility(View.GONE);
+                        bRemovePresenca.setVisibility(View.VISIBLE);
+                        recreate();
+                    },
+                    errorMsg -> {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+                    });
+
+        } catch (Exception e) {
+            mProgressDialog.dismiss();
+            Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    private void onRemovePresence(View view) {
+        thisEvento.getIdsConfirmados().remove(idVoluntario);
+
+        mProgressDialog.show();
+        try {
+            mViewModel.saveEvent(this, thisEvento,
+                    success -> {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, "Presença removida", Toast.LENGTH_SHORT).show();
+                        bConfirmPresenca.setVisibility(View.VISIBLE);
+                        bRemovePresenca.setVisibility(View.GONE);
+                        recreate();
+                    },
+                    errorMsg -> {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+                    });
+
+        } catch (Exception e) {
+            mProgressDialog.dismiss();
+            Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
     }
 }
