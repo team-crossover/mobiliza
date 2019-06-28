@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.crossover.mobiliza.app.AppExecutors;
 import com.crossover.mobiliza.app.data.local.AppDatabase;
 import com.crossover.mobiliza.app.data.local.dao.VoluntarioDao;
+import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.local.entity.Voluntario;
 import com.crossover.mobiliza.app.data.remote.NetworkBoundResource;
 import com.crossover.mobiliza.app.data.remote.RateLimiter;
@@ -53,6 +54,21 @@ public class VoluntarioRepository {
         rateLimiter = new RateLimiter<Long>(10, TimeUnit.SECONDS);
     }
 
+    public void deletarVoluntario(String googleIdToken, Consumer<User> onSuccess, Consumer<String> onFailure) {
+        AppExecutors.getInstance().network().execute(() -> {
+            Call<User> call = voluntarioService.deleteSelf(googleIdToken);
+            AppServices.runCallAsync(call,
+                    user -> {
+                        rateLimiter.shouldFetch(-1L);
+                        onSuccess.accept(user);
+                        Log.i(TAG, "deleted voluntario");
+                    },
+                    errorMsg -> {
+                        onFailure.accept(errorMsg);
+                    });
+        });
+    }
+
     public LiveData<Resource<List<Voluntario>>> findAll() {
         return new NetworkBoundResource<List<Voluntario>, List<Voluntario>>() {
             @Override
@@ -77,7 +93,7 @@ public class VoluntarioRepository {
 
             @Override
             protected boolean shouldFetch() {
-                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+                return rateLimiter.shouldFetch(-1L) || super.shouldFetch();
             }
         }.getAsLiveData();
     }
@@ -114,7 +130,7 @@ public class VoluntarioRepository {
         AppExecutors.getInstance().network().execute(() -> {
             AppServices.runCallAsync(voluntarioService.save(ong, googleIdToken),
                     newOng -> {
-                        rateLimiter.shouldFetch(null);
+                        rateLimiter.shouldFetch(-1L);
                         rateLimiter.shouldFetch(ong.getId());
                         onSuccess.accept(newOng);
                         Log.i(TAG, "saved ong: " + newOng.toString());

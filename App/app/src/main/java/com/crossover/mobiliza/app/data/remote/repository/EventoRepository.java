@@ -11,6 +11,7 @@ import com.crossover.mobiliza.app.AppExecutors;
 import com.crossover.mobiliza.app.data.local.AppDatabase;
 import com.crossover.mobiliza.app.data.local.dao.EventoDao;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.NetworkBoundResource;
 import com.crossover.mobiliza.app.data.remote.RateLimiter;
 import com.crossover.mobiliza.app.data.remote.Resource;
@@ -53,15 +54,31 @@ public class EventoRepository {
         rateLimiter = new RateLimiter<>(10, TimeUnit.SECONDS);
     }
 
+    public void deletarEvento(Long idEvento, String googleIdToken, Consumer<Ong> onSuccess, Consumer<String> onFailure) {
+        AppExecutors.getInstance().network().execute(() -> {
+            Call<Ong> call = eventoService.deleteById(idEvento, googleIdToken);
+            AppServices.runCallAsync(call,
+                    ong -> {
+                        rateLimiter.shouldFetch(-1L);
+                        rateLimiter.shouldFetch(idEvento);
+                        onSuccess.accept(ong);
+                        Log.i(TAG, "deleted evento: " + idEvento);
+                    },
+                    errorMsg -> {
+                        onFailure.accept(errorMsg);
+                    });
+        });
+    }
+
     public void confirmarEvento(Long idEvento, String googleIdToken, boolean valor, Consumer<Evento> onSuccess, Consumer<String> onFailure) {
         AppExecutors.getInstance().network().execute(() -> {
             Call<Evento> call = eventoService.confirmar(idEvento, googleIdToken, valor);
             AppServices.runCallAsync(call,
                     newEvento -> {
-                        rateLimiter.shouldFetch(null);
+                        rateLimiter.shouldFetch(-1L);
                         rateLimiter.shouldFetch(idEvento);
                         onSuccess.accept(newEvento);
-                        Log.i(TAG, "saved evento: " + newEvento.toString());
+                        Log.i(TAG, "confirmed evento: " + newEvento.toString());
                     },
                     errorMsg -> {
                         onFailure.accept(errorMsg);
@@ -93,7 +110,7 @@ public class EventoRepository {
 
             @Override
             protected boolean shouldFetch() {
-                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+                return rateLimiter.shouldFetch(-1L) || super.shouldFetch();
             }
         }.getAsLiveData();
     }
@@ -121,7 +138,7 @@ public class EventoRepository {
 
             @Override
             protected boolean shouldFetch() {
-                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+                return rateLimiter.shouldFetch(-1L) || super.shouldFetch();
             }
         }.getAsLiveData();
     }
@@ -149,7 +166,7 @@ public class EventoRepository {
 
             @Override
             protected boolean shouldFetch() {
-                return rateLimiter.shouldFetch(null) || super.shouldFetch();
+                return rateLimiter.shouldFetch(-1L) || super.shouldFetch();
             }
         }.getAsLiveData();
     }
@@ -187,7 +204,7 @@ public class EventoRepository {
             Call<Evento> call = eventoService.save(evento, googleIdToken);
             AppServices.runCallAsync(call,
                     newEvento -> {
-                        rateLimiter.shouldFetch(null);
+                        rateLimiter.shouldFetch(-1L);
                         rateLimiter.shouldFetch(evento.getId());
                         onSuccess.accept(newEvento);
                         Log.i(TAG, "saved evento: " + newEvento.toString());

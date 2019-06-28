@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +16,15 @@ import androidx.viewpager.widget.ViewPager;
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.User;
+import com.crossover.mobiliza.app.data.remote.repository.OngRepository;
+import com.crossover.mobiliza.app.data.remote.repository.VoluntarioRepository;
 import com.crossover.mobiliza.app.data.remote.service.AppServices;
 import com.crossover.mobiliza.app.data.remote.service.UserService;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.SectionsPagerAdapter;
+import com.crossover.mobiliza.app.ui.profile.GoogleProfileActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileVoluntarioActivity;
-import com.crossover.mobiliza.app.ui.profile.GoogleProfileActivity;
 import com.crossover.mobiliza.app.ui.signin.SigninActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private static final int GOOGLE_PROFILE_CODE = 36848;
+
     private ProgressDialog mProgressDialog;
     private GoogleSignInClient mGoogleSignInClient;
     private static User mUser;
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInAccount googleAccount;
     private static FloatingActionButton fab;
 
-    public static User getUser(){
+    public static User getUser() {
         if (mUser != null) {
             return mUser;
         } else {
@@ -175,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, GoogleProfileActivity.class);
         StringBuilder nome = new StringBuilder();
 
+        myIntent.putExtra("idOng", mUser.getIdOng());
+        myIntent.putExtra("idVoluntario", mUser.getIdVoluntario());
+        myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
+
         // Available info only!
         if (googleAccount == null) {
             return;
@@ -198,13 +207,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (mUser.isLastUsedAsOng()) {
-            myIntent.putExtra("userType", "Conta tipo ONG");
+            myIntent.putExtra("userType", "Conta de ONG");
         } else {
-            myIntent.putExtra("userType", "Conta tipo Voluntário");
+            myIntent.putExtra("userType", "Conta de Voluntário");
         }
 
         myIntent.putExtra("googleName", nome.toString());
-        this.startActivity(myIntent);
+        this.startActivityForResult(myIntent, GOOGLE_PROFILE_CODE);
     }
 
 
@@ -244,13 +253,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void signOut() {
         mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, task -> updateUser(null));
-        Toast.makeText(this, "Você foi deslogado", Toast.LENGTH_LONG).show();
-    }
-
-    private void revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(this, task -> updateUser(null));
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Você foi deslogado", Toast.LENGTH_LONG).show();
+                        updateUser(null);
+                    }
+                });
     }
 
     private void updateUserFromAccount(GoogleSignInAccount account) {
@@ -287,6 +295,43 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: Show userService's name or profile picture somewhere...
             } else {
                 // TODO: Show userService's name or profile picture somewhere...
+            }
+        }
+    }
+
+    private void deleteOng() {
+        this.signOut();
+        OngRepository.getInstance(this).deletarOng(mUser.getGoogleIdToken(),
+                ong -> {
+                    Toast.makeText(this, "Conta de ONG deletada!", Toast.LENGTH_LONG).show();
+                },
+                errorMsg -> {
+                    Toast.makeText(this, "Erro ao deletar: " + errorMsg, Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private void deleteVoluntario() {
+        this.signOut();
+        VoluntarioRepository.getInstance(this).deletarVoluntario(mUser.getGoogleIdToken(),
+                user -> {
+                    Toast.makeText(this, "Conta de voluntário deletada!", Toast.LENGTH_LONG).show();
+                },
+                errorMsg -> {
+                    Toast.makeText(this, "Erro ao deletar: " + errorMsg, Toast.LENGTH_LONG).show();
+                });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GOOGLE_PROFILE_CODE && resultCode == Activity.RESULT_OK) {
+            boolean shouldDeleteAccount = data.getBooleanExtra("shouldDeleteAccount", false);
+            if (shouldDeleteAccount) {
+                if (mUser.isLastUsedAsOng()) {
+                    this.deleteOng();
+                } else {
+                    this.deleteVoluntario();
+                }
             }
         }
     }

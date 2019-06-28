@@ -33,11 +33,12 @@ public class ProfileOngActivity extends AppCompatActivity {
     private EditText enderecoText;
     private String regiao;
     private EditText telefoneText;
+    private Button deleteBtn;
 
     private Spinner categoriaSpinner;
     private Spinner regiaoSpinner;
 
-    private String[] categoriasArray = new String[] {
+    private String[] categoriasArray = new String[]{
             CategoriaEnum.ANIMAIS.getText(),
             CategoriaEnum.EDUCACAO.getText(),
             CategoriaEnum.ESPORTE.getText(),
@@ -46,7 +47,7 @@ public class ProfileOngActivity extends AppCompatActivity {
             CategoriaEnum.TURISMO.getText()
     };
 
-    private String[] regioesArray = new String[] {
+    private String[] regioesArray = new String[]{
             RegiaoEnum.CENTRO.getText(),
             RegiaoEnum.LESTE.getText(),
             RegiaoEnum.NOROESTE.getText(),
@@ -84,7 +85,7 @@ public class ProfileOngActivity extends AppCompatActivity {
         descText = findViewById(R.id.ongDescricaoText);
 
         categoriaSpinner = findViewById(R.id.spCategoria);
-        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, categoriasArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriaSpinner.setAdapter(adapter);
@@ -108,7 +109,7 @@ public class ProfileOngActivity extends AppCompatActivity {
         enderecoText = findViewById(R.id.ongEnderecoText);
 
         regiaoSpinner = findViewById(R.id.spRegiao);
-        ArrayAdapter<String> adapterRegiao =new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapterRegiao = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, regioesArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regiaoSpinner.setAdapter(adapterRegiao);

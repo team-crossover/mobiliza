@@ -25,6 +25,7 @@ import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
 import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -82,8 +83,10 @@ public class MainEventsFragment extends Fragment {
             if (listResource.getData() != null) {
                 mProgressDialog.show();
                 List<Evento> eventos = new ArrayList<>();
+                Calendar now = Calendar.getInstance();
                 for (Evento evt : listResource.getData()) {
-                    eventos.add(evt);
+                    if (!evt.getDataRealizacaoAsCalendar().before(now))
+                        eventos.add(evt);
                 }
 
                 // Adapter Config
@@ -105,7 +108,7 @@ public class MainEventsFragment extends Fragment {
 
                                 if (user != null) {
                                     Toast.makeText(getContext(), "meuId: " + user.getId(), Toast.LENGTH_SHORT).show();
-                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getId())) {
+                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getIdOng())) {
                                         myIntent.putExtra("idOwner", user.getId());
                                     } else {
                                         myIntent.putExtra("idVoluntario", user.getIdVoluntario());

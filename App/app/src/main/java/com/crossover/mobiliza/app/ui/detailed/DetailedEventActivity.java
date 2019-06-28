@@ -80,6 +80,17 @@ public class DetailedEventActivity extends AppCompatActivity {
             volunteerOptions.setVisibility(LinearLayout.GONE);
         }
 
+        Button editarEvento = findViewById(R.id.buttonEditEvent);
+        Button deletarEvento = findViewById(R.id.buttonDeletEvent);
+        editarEvento.setOnClickListener(this::onEdit);
+        deletarEvento.setOnClickListener(this::onDelete);
+
+        Log.i(TAG, "onCreate: ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mViewModel.getEvento(this).observe(this, eventoResource -> {
             if (eventoResource.getStatus() == Resource.Status.SUCCESS && eventoResource.getData() != null) {
@@ -120,15 +131,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                 Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
             }
         });
-
-
-        Button editarEvento = findViewById(R.id.buttonEditEvent);
-        Button deletarEvento = findViewById(R.id.buttonDeletEvent);
-        editarEvento.setOnClickListener(this::onEdit);
-        deletarEvento.setOnClickListener(this::onDelete);
-
-
-        Log.i(TAG, "onCreate: ");
     }
 
     private void onEdit(View view) {
@@ -140,8 +142,23 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     private void onDelete(View view) {
-        //mProgressDialog.show();
-        Toast.makeText(this, "Deletar Evento", Toast.LENGTH_SHORT).show();
+        mProgressDialog.show();
+        try {
+            mViewModel.deletarEvento(this,
+                    ong ->
+                    {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, "Evento deletado!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    },
+                    errorMsg -> {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+                    });
+        } catch (Exception e) {
+            mProgressDialog.dismiss();
+            Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void onConfirmPresence(View view) {

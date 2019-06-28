@@ -9,6 +9,9 @@ import androidx.core.util.Consumer;
 import com.crossover.mobiliza.app.AppExecutors;
 import com.crossover.mobiliza.app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -56,11 +59,15 @@ public class AppServices {
                         onSuccess.accept(response.body());
                     } else {
                         try {
-                            Log.e(TAG, response.errorBody().string());
-                        } catch (IOException e) {
+                            String resp = response.errorBody().string();
+                            JSONObject json = new JSONObject(resp);
+                            String msg = json.getString("message");
+                            Log.e(TAG, msg);
+                            onFailure.accept(msg);
+                        } catch (IOException | JSONException e) {
                             e.printStackTrace();
+                            onFailure.accept(response.message());
                         }
-                        onFailure.accept(response.message());
                     }
                 }
 

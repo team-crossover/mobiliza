@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
 
@@ -35,8 +36,10 @@ public class DetailedEventViewModel extends ViewModel {
         EventoRepository.getInstance(context).confirmarEvento(mEventId, mGoogleIdToken, valor, onSuccess, onFailure);
     }
 
-    public void deleteEvent() {
-
+    public void deletarEvento(Context context,
+                              Consumer<Ong> onSuccess,
+                              Consumer<String> onFailure) {
+        EventoRepository.getInstance(context).deletarEvento(mEventId, mGoogleIdToken, onSuccess, onFailure);
     }
 
     public void saveEvent(Context context,
