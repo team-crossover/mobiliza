@@ -101,8 +101,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);
-                    //qntConfirmados.setText("Quantidade de confirmados: " + evt.getIdsConfirmados().size());
-                    qntConfirmados.setText("idDonoEvento: " + evt.getIdOng() + " - idDessa Ong: " + idOwner);
+                    qntConfirmados.setText(evt.getIdsConfirmados().size());
                 }
 
                 // Presença
@@ -153,7 +152,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
-                        Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
         } catch (Exception e) {
             mProgressDialog.dismiss();

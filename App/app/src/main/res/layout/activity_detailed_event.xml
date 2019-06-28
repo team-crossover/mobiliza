@@ -76,10 +76,25 @@
             android:layout_height="wrap_content"
             android:text="nome evento" />
 
-        <TextView
-            android:id="@+id/detailEventConfirmados"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantidade de confirmados" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/detailEventTextConfirmados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantidade de confirmados: " />
+
+            <TextView
+                android:id="@+id/detailEventConfirmados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="TextView" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

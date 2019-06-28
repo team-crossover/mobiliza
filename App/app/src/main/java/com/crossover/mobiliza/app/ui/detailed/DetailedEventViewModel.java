@@ -42,16 +42,4 @@ public class DetailedEventViewModel extends ViewModel {
         EventoRepository.getInstance(context).deletarEvento(mEventId, mGoogleIdToken, onSuccess, onFailure);
     }
 
-    public void saveEvent(Context context,
-                          Evento updatedevent,
-                          Consumer<Evento> onSuccess,
-                          Consumer<String> onFailure) {
-
-        if (updatedevent.getId() == mEventId) {
-            EventoRepository.getInstance(context).save(updatedevent, mGoogleIdToken, onSuccess, onFailure);
-        } else {
-            Toast.makeText(context, "Não foi possível atualizar o evento", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 }
