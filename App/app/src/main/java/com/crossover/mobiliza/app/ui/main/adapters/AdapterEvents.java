@@ -21,6 +21,10 @@ public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewH
         this.listaEventos = listaEventos;
     }
 
+    public Evento getEvento(int position) {
+        return listaEventos == null ? null : listaEventos.get(position);
+    }
+
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -1,8 +1,5 @@
 package com.crossover.mobiliza.app.ui.detailed;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
@@ -91,7 +91,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);
                     //qntConfirmados.setText("Quantidade de confirmados: " + evt.getIdsConfirmados().size());
-                    qntConfirmados.setText("idDonoEvento: " + evt.getIdOng() + " - idDessa Ong: " + idOwner );
+                    qntConfirmados.setText("idDonoEvento: " + evt.getIdOng() + " - idDessa Ong: " + idOwner);
                 }
 
                 // Presença
@@ -145,54 +145,46 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     private void onConfirmPresence(View view) {
-        thisEvento.getIdsConfirmados().add(idVoluntario);
-
         mProgressDialog.show();
         try {
-            mViewModel.saveEvent(this, thisEvento,
-                    success -> {
+            mViewModel.confirmarEvento(this, true,
+                    evento ->
+                    {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença confirmada!", Toast.LENGTH_SHORT).show();
                         bConfirmPresenca.setVisibility(View.GONE);
                         bRemovePresenca.setVisibility(View.VISIBLE);
-                        recreate();
+//                        recreate();
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
-
         } catch (Exception e) {
             mProgressDialog.dismiss();
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void onRemovePresence(View view) {
-        thisEvento.getIdsConfirmados().remove(idVoluntario);
-
         mProgressDialog.show();
         try {
-            mViewModel.saveEvent(this, thisEvento,
-                    success -> {
+            mViewModel.confirmarEvento(this, false,
+                    evento ->
+                    {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença removida", Toast.LENGTH_SHORT).show();
                         bConfirmPresenca.setVisibility(View.VISIBLE);
                         bRemovePresenca.setVisibility(View.GONE);
-                        recreate();
+//                        recreate();
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
-
         } catch (Exception e) {
             mProgressDialog.dismiss();
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-
     }
 }

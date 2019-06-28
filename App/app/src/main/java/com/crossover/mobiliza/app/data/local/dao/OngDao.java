@@ -23,4 +23,6 @@ public interface OngDao extends DaoBase<Ong> {
     @Query("SELECT * FROM ongs where id = :id")
     LiveData<Ong> findById(long id);
 
+    @Query("DELETE FROM ongs")
+    void deleteAll();
 }

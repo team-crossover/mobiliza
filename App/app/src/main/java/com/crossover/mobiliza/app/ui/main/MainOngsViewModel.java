@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.OngRepository;
+import com.crossover.mobiliza.app.ui.main.adapters.AdapterOngs;
 
 import java.util.List;
 

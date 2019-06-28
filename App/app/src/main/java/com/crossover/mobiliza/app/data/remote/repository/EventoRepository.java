@@ -53,12 +53,30 @@ public class EventoRepository {
         rateLimiter = new RateLimiter<>(10, TimeUnit.SECONDS);
     }
 
+    public void confirmarEvento(Long idEvento, String googleIdToken, boolean valor, Consumer<Evento> onSuccess, Consumer<String> onFailure) {
+        AppExecutors.getInstance().network().execute(() -> {
+            Call<Evento> call = eventoService.confirmar(idEvento, googleIdToken, valor);
+            AppServices.runCallAsync(call,
+                    newEvento -> {
+                        rateLimiter.shouldFetch(null);
+                        rateLimiter.shouldFetch(idEvento);
+                        onSuccess.accept(newEvento);
+                        Log.i(TAG, "saved evento: " + newEvento.toString());
+                    },
+                    errorMsg -> {
+                        onFailure.accept(errorMsg);
+                    });
+        });
+    }
+
     public LiveData<Resource<List<Evento>>> findAll() {
         return new NetworkBoundResource<List<Evento>, List<Evento>>() {
             @Override
             protected void saveCallResult(List<Evento> item) {
-                if (item != null)
+                if (item != null) {
+                    eventoDao.deleteAll();
                     eventoDao.saveAll(item);
+                }
             }
 
             @NonNull
@@ -84,8 +102,9 @@ public class EventoRepository {
         return new NetworkBoundResource<List<Evento>, List<Evento>>() {
             @Override
             protected void saveCallResult(List<Evento> item) {
-                if (item != null)
+                if (item != null) {
                     eventoDao.saveAll(item);
+                }
             }
 
             @NonNull
@@ -111,8 +130,9 @@ public class EventoRepository {
         return new NetworkBoundResource<List<Evento>, List<Evento>>() {
             @Override
             protected void saveCallResult(List<Evento> item) {
-                if (item != null)
+                if (item != null) {
                     eventoDao.saveAll(item);
+                }
             }
 
             @NonNull

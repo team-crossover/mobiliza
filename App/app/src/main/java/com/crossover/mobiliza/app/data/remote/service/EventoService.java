@@ -25,4 +25,6 @@ public interface EventoService {
     @POST("eventos")
     Call<Evento> save(@Body Evento evento, @Query("googleIdToken") String googleIdToken);
 
+    @POST("eventos/{id}/confirmar")
+    Call<Evento> confirmar(@Path("id") Long id, @Query("googleIdToken") String googleIdToken, @Query("valor") Boolean valor);
 }

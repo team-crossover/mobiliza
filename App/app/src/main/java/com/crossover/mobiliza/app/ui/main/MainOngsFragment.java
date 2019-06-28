@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -56,7 +55,14 @@ public class MainOngsFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_ongs, container, false);
 
-        //...?
+        // TODO: Adicionar um "swipe to refresh"
+
+        // RecyclerView Config
+        recyclerView = root.findViewById(R.id.recyclerOngs);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
         return root;
     }
@@ -77,10 +83,6 @@ public class MainOngsFragment extends Fragment {
                 AdapterOngs adapterOngs = new AdapterOngs(ongs);
 
                 // RecyclerView Config
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
                 recyclerView.setAdapter(adapterOngs);
 
                 // Click event
@@ -89,23 +91,24 @@ public class MainOngsFragment extends Fragment {
                                 getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Ong ong = ongs.get(position);
+                                Ong ong = ((AdapterOngs) recyclerView.getAdapter()).getOng(position);
                                 Intent myIntent = new Intent(getContext(), DetailedOngActivity.class);
                                 myIntent.putExtra("idOng", ong.getId());
                                 getContext().startActivity(myIntent);
                             }
 
                             @Override
-                            public void onLongItemClick(View view, int position) { }
+                            public void onLongItemClick(View view, int position) {
+                            }
 
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
                         }
                         )
                 );
 
             }
         });
-
     }
 }

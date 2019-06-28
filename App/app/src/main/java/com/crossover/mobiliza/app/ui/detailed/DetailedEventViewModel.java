@@ -11,8 +11,6 @@ import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
 
-import java.util.Calendar;
-
 public class DetailedEventViewModel extends ViewModel {
 
     private long mEventId = -1;
@@ -28,6 +26,13 @@ public class DetailedEventViewModel extends ViewModel {
 
     public LiveData<Resource<Evento>> getEvento(Context context) {
         return EventoRepository.getInstance(context).findById(mEventId);
+    }
+
+    public void confirmarEvento(Context context,
+                                Boolean valor,
+                                Consumer<Evento> onSuccess,
+                                Consumer<String> onFailure) {
+        EventoRepository.getInstance(context).confirmarEvento(mEventId, mGoogleIdToken, valor, onSuccess, onFailure);
     }
 
     public void deleteEvent() {

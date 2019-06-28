@@ -21,6 +21,10 @@ public class AdapterOngs extends RecyclerView.Adapter<AdapterOngs.OngViewHolder>
         this.listaOngs = listaOngs;
     }
 
+    public Ong getOng(int position) {
+        return listaOngs == null ? null : listaOngs.get(position);
+    }
+
     @NonNull
     @Override
     public OngViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

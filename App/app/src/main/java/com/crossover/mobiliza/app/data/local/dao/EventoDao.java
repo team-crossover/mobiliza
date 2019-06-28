@@ -26,4 +26,7 @@ public interface EventoDao extends DaoBase<Evento> {
     @Query("SELECT * FROM eventos where id = :id")
     LiveData<Evento> findById(long id);
 
+    @Query("DELETE FROM eventos")
+    void deleteAll();
+
 }

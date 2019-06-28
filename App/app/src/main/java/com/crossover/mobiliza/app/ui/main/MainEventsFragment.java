@@ -61,7 +61,16 @@ public class MainEventsFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_eventos, container, false);
-        //...
+
+        // TODO: Adicionar um "swipe to refresh"
+
+        // RecyclerView Config
+        recyclerView = root.findViewById(R.id.recyclerEvents);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+
         return root;
     }
 
@@ -69,7 +78,6 @@ public class MainEventsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // TODO: Adicionar um "swipe to refresh"
         mainEventsViewModel.findAllEventos(getContext()).observe(this, listResource -> {
             if (listResource.getData() != null) {
                 mProgressDialog.show();
@@ -78,16 +86,11 @@ public class MainEventsFragment extends Fragment {
                     eventos.add(evt);
                 }
 
-                recyclerView = getView().findViewById(R.id.recyclerEvents);
-
                 // Adapter Config
                 AdapterEvents adapterEvents = new AdapterEvents(eventos);
 
                 // RecyclerView Config
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+                recyclerView = getView().findViewById(R.id.recyclerEvents);
                 recyclerView.setAdapter(adapterEvents);
 
                 // Click event
@@ -97,12 +100,12 @@ public class MainEventsFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, int position) {
                                 User user = mainEventsViewModel.getCurrentUser();
-                                Evento evento = eventos.get(position);
+                                Evento evento = ((AdapterEvents) recyclerView.getAdapter()).getEvento(position);
                                 Intent myIntent = new Intent(getContext(), DetailedEventActivity.class);
 
                                 if (user != null) {
                                     Toast.makeText(getContext(), "meuId: " + user.getId(), Toast.LENGTH_SHORT).show();
-                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getId())){
+                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getId())) {
                                         myIntent.putExtra("idOwner", user.getId());
                                     } else {
                                         myIntent.putExtra("idVoluntario", user.getIdVoluntario());
@@ -128,6 +131,5 @@ public class MainEventsFragment extends Fragment {
                 mProgressDialog.dismiss();
             }
         });
-
     }
 }

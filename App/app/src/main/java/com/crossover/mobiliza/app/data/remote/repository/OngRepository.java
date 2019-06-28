@@ -57,8 +57,10 @@ public class OngRepository {
         return new NetworkBoundResource<List<Ong>, List<Ong>>() {
             @Override
             protected void saveCallResult(List<Ong> item) {
-                if (item != null)
+                if (item != null) {
+                    ongDao.deleteAll();
                     ongDao.saveAll(item);
+                }
             }
 
             @NonNull

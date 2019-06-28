@@ -57,8 +57,10 @@ public class VoluntarioRepository {
         return new NetworkBoundResource<List<Voluntario>, List<Voluntario>>() {
             @Override
             protected void saveCallResult(List<Voluntario> item) {
-                if (item != null)
+                if (item != null) {
+                    voluntarioDao.deleteAll();
                     voluntarioDao.saveAll(item);
+                }
             }
 
             @NonNull

@@ -20,4 +20,6 @@ public interface UserDao extends DaoBase<User> {
     @Query("SELECT * FROM users WHERE googleIdToken = :googleIdToken")
     LiveData<User> findByGoogleIdToken(String googleIdToken);
 
+    @Query("DELETE FROM users")
+    void deleteAll();
 }
