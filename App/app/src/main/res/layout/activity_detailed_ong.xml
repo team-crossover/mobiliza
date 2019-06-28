@@ -6,26 +6,146 @@
     android:layout_height="match_parent"
     tools:context=".ui.detailed.DetailedOngActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/detailOngName"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="nome ong" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp" >
+
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/detailOngName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nome ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <TextView
+                android:id="@+id/textViewDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/detailOngDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="descrição ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoria"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/detailOngCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="categoria ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefone"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/detailOngTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="telefone ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-mail"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/detailOngEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="e-mail ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Endereço"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/detailOngAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="endereço ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Região"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/detailOngRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="região ong"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginBottom="30dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

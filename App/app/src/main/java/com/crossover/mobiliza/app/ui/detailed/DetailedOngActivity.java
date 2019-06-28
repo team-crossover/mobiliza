@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,13 @@ public class DetailedOngActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private DetailedOngViewModel mViewModel;
     private TextView nomeOng;
+    private TextView descricaoOng;
+    private TextView categoriaOng;
+    private TextView telefoneOng;
+    private TextView emailOng;
+    private TextView enderecoOng;
+    private TextView regiaoOng;
+    private ImageView fotoOng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,12 @@ public class DetailedOngActivity extends AppCompatActivity {
 
         // Elementos da Tela
         nomeOng = findViewById(R.id.detailOngName);
+        descricaoOng = findViewById(R.id.detailOngDescription);
+        categoriaOng = findViewById(R.id.detailOngCategory);
+        telefoneOng = findViewById(R.id.detailOngTelephone);
+        emailOng = findViewById(R.id.detailOngEmail);
+        enderecoOng = findViewById(R.id.detailOngAddress);
+        regiaoOng = findViewById(R.id.detailOngRegion);
 
         mViewModel.getOng(this).observe(this, ongResource -> {
             if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
@@ -46,6 +60,12 @@ public class DetailedOngActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
 
                 nomeOng.setText(ong.getNome());
+                descricaoOng.setText(ong.getDescricao());
+                categoriaOng.setText(ong.getCategoria());
+                telefoneOng.setText(ong.getTelefone());
+                emailOng.setText(ong.getEmail());
+                enderecoOng.setText(ong.getEndereco());
+                regiaoOng.setText(ong.getRegiao());
 
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
                 mProgressDialog.show();
