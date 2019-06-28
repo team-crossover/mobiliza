@@ -66,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupAuth();
         setupFab();
-
-        event = new Evento();
-
-
     }
 
 
@@ -170,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAddEvent() {
+        event = new Evento();
         Intent myIntent = new Intent(this, AddEventActivity.class);
         myIntent.putExtra("idEvent", event.getId());
         myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());

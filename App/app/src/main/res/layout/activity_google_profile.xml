@@ -69,7 +69,7 @@
             android:layout_height="@dimen/fab_margin" />
 
         <Button
-            android:id="@+id/googleDeleteButton"
+            android:id="@+id/deleteAccountButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -41,7 +41,7 @@ public class AddEventActivity extends AppCompatActivity {
     /**
      * TODO: inserir captação de dados para os outros atributos de evento: data, endereço, região(possui enum). Olhar a entidade evento.
      *
-     * Vai ficar faltando: validação de dados e confirmação de participantes.
+     * Vai ficar faltando: validação de dados.
      */
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -81,6 +81,7 @@ public class AddEventActivity extends AppCompatActivity {
                 nameText.setVisibility(View.VISIBLE);
                 // Set the fields to contain  the event's information
                 nameText.setText(evt.getNome());
+                descricao.setText(evt.getDescricao());
 
             } else if (eventoResource.getStatus() == Resource.Status.LOADING) {
                 mProgressDialog.show();

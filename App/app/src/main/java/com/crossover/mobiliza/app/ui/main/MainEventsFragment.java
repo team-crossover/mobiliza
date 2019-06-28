@@ -107,9 +107,10 @@ public class MainEventsFragment extends Fragment {
                                 Intent myIntent = new Intent(getContext(), DetailedEventActivity.class);
 
                                 if (user != null) {
-                                    Toast.makeText(getContext(), "meuId: " + user.getId(), Toast.LENGTH_SHORT).show();
-                                    if (user.isLastUsedAsOng() && (evento.getIdOng() == user.getIdOng())) {
-                                        myIntent.putExtra("idOwner", user.getId());
+                                    if (user.isLastUsedAsOng()) {
+                                        if (evento.getIdOng() == user.getIdOng()) {
+                                            myIntent.putExtra("idOwner", user.getId());
+                                        }
                                     } else {
                                         myIntent.putExtra("idVoluntario", user.getIdVoluntario());
                                     }

@@ -1,6 +1,8 @@
 package com.crossover.mobiliza.app.ui.profile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +32,7 @@ public class GoogleProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.googleEmail);
         profilePicture = findViewById(R.id.googlePicture);
         userType = findViewById(R.id.accountType);
-        deleteBtn = findViewById(R.id.googleDeleteButton);
+        deleteBtn = findViewById(R.id.deleteAccountButton);
 
         Intent intent = getIntent();
         if (intent.hasExtra("googleName")) {
@@ -59,7 +61,23 @@ public class GoogleProfileActivity extends AppCompatActivity {
             Glide.with(this).load(pic).into(profilePicture);
         }
 
-        deleteBtn.setOnClickListener(this::onDelete);
+        deleteBtn.setOnClickListener(this::onConfirmDelete);
+    }
+
+    private void onConfirmDelete(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Deseja excluir sua conta?");
+        alert.setMessage("Esta ação é irreversível");
+        alert.setIcon(android.R.drawable.ic_delete);
+
+        alert.setPositiveButton("Deletar", (dialog, which) -> onDelete(view));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
     }
 
     private void onDelete(View view) {

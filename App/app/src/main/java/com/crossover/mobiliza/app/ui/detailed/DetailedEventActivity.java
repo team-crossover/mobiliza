@@ -1,6 +1,8 @@
 package com.crossover.mobiliza.app.ui.detailed;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +34,6 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bRemovePresenca;
 
     private Long eventId;
-    private Evento thisEvento;
     private String googleIdToken;
     private Long idOwner;
     private Long idVoluntario;
@@ -83,7 +84,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         Button editarEvento = findViewById(R.id.buttonEditEvent);
         Button deletarEvento = findViewById(R.id.buttonDeletEvent);
         editarEvento.setOnClickListener(this::onEdit);
-        deletarEvento.setOnClickListener(this::onDelete);
+        deletarEvento.setOnClickListener(this::onConfirmDelete);
 
         Log.i(TAG, "onCreate: ");
     }
@@ -101,7 +102,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);
-                    qntConfirmados.setText(evt.getIdsConfirmados().size());
+                    qntConfirmados.setText("" + evt.getIdsConfirmados().size());
                 }
 
                 // Presença
@@ -113,7 +114,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                         bConfirmPresenca.setVisibility(View.VISIBLE);
                         bRemovePresenca.setVisibility(View.GONE);
                     }
-                    thisEvento = evt;
                     bConfirmPresenca.setOnClickListener(this::onConfirmPresence);
                     bRemovePresenca.setOnClickListener(this::onRemovePresence);
                 }
@@ -140,6 +140,23 @@ public class DetailedEventActivity extends AppCompatActivity {
         this.startActivity(myIntent);
     }
 
+    private void onConfirmDelete(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Deseja deletar este evento?");
+        alert.setMessage("Esta ação é irreversível");
+        alert.setIcon(android.R.drawable.ic_delete);
+
+        alert.setPositiveButton("Deletar", (dialog, which) -> onDelete(view));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
+    }
+
+
     private void onDelete(View view) {
         mProgressDialog.show();
         try {
@@ -152,7 +169,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
-                        //Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
         } catch (Exception e) {
             mProgressDialog.dismiss();
@@ -168,9 +185,9 @@ public class DetailedEventActivity extends AppCompatActivity {
                     {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença confirmada!", Toast.LENGTH_SHORT).show();
-                        bConfirmPresenca.setVisibility(View.GONE);
-                        bRemovePresenca.setVisibility(View.VISIBLE);
-//                        recreate();
+//                        bConfirmPresenca.setVisibility(View.GONE);
+//                        bRemovePresenca.setVisibility(View.VISIBLE);
+                        recreate();
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
@@ -190,9 +207,9 @@ public class DetailedEventActivity extends AppCompatActivity {
                     {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença removida", Toast.LENGTH_SHORT).show();
-                        bConfirmPresenca.setVisibility(View.VISIBLE);
-                        bRemovePresenca.setVisibility(View.GONE);
-//                        recreate();
+//                        bConfirmPresenca.setVisibility(View.VISIBLE);
+//                        bRemovePresenca.setVisibility(View.GONE);
+                        recreate();
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
