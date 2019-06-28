@@ -18,21 +18,16 @@
             android:layout_marginTop="20dp" >
 
             <TextView
-                android:id="@+id/textViewNome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nome"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginBottom="5dp"/>
-
-            <TextView
                 android:id="@+id/detailOngName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="nome ong"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:drawableLeft="@mipmap/ic_launcher_round"
+                android:textStyle="bold"
+                android:drawablePadding="8dp"
+                android:textSize="30sp"
+                android:gravity="left" />
 
             <TextView
                 android:id="@+id/textViewDescricao"
