@@ -21,6 +21,7 @@ import com.crossover.mobiliza.app.data.remote.repository.VoluntarioRepository;
 import com.crossover.mobiliza.app.data.remote.service.AppServices;
 import com.crossover.mobiliza.app.data.remote.service.UserService;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
+import com.crossover.mobiliza.app.ui.event.MyEventsActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.SectionsPagerAdapter;
 import com.crossover.mobiliza.app.ui.profile.GoogleProfileActivity;
 import com.crossover.mobiliza.app.ui.profile.ProfileOngActivity;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             if (mUser.isLastUsedAsOng()) {
                 menu.add(0, 2, Menu.NONE, R.string.action_edit_profile);
                 menu.add(0, 4, Menu.NONE, R.string.action_new_event);
+                menu.add(0, 6, Menu.NONE, "Meus eventos");
             }
             menu.add(0, 5, Menu.NONE, R.string.action_google_info);
             menu.add(0, 3, Menu.NONE, R.string.action_signout);
@@ -142,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 showGoogleAccountInfo();
                 return true;
+            case 6:
+                showMyEvents();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -169,6 +174,13 @@ public class MainActivity extends AppCompatActivity {
         event = new Evento();
         Intent myIntent = new Intent(this, AddEventActivity.class);
         myIntent.putExtra("idEvent", event.getId());
+        myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
+        this.startActivity(myIntent);
+    }
+
+    private void showMyEvents() {
+        Intent myIntent = new Intent(this, MyEventsActivity.class);
+        myIntent.putExtra("idOng", mUser.getIdOng());
         myIntent.putExtra("googleIdToken", mUser.getGoogleIdToken());
         this.startActivity(myIntent);
     }
