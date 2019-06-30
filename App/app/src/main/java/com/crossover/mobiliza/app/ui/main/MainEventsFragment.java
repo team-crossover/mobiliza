@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.User;
+import com.crossover.mobiliza.app.data.local.enums.CategoriaEnum;
 import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
+import com.crossover.mobiliza.app.ui.filteredsearch.FilterdActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
 import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
 
@@ -38,6 +41,8 @@ public class MainEventsFragment extends Fragment {
     private MainEventsViewModel mainEventsViewModel;
     private ProgressDialog mProgressDialog;
     private RecyclerView recyclerView;
+    private Button filtrarCategoria;
+    private Button filtrarRegiao;
 
     public static MainEventsFragment newInstance() {
         MainEventsFragment fragment = new MainEventsFragment();
@@ -57,11 +62,28 @@ public class MainEventsFragment extends Fragment {
 
     }
 
+    private void onCategoryFilter(View view) {
+        Intent myIntent = new Intent(getContext(), FilterdActivity.class);
+        myIntent.putExtra("isEvento", true);
+        myIntent.putExtra("category", true);
+        myIntent.putExtra("filter", CategoriaEnum.ANIMAIS.getText());
+        getContext().startActivity(myIntent);
+    }
+
+    private void onRegionFilter(View view) {
+        Toast.makeText(getContext(), "regiao", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_eventos, container, false);
+
+        filtrarCategoria = root.findViewById(R.id.buttonEventCategory);
+        filtrarCategoria.setOnClickListener(this::onCategoryFilter);
+        filtrarRegiao = root.findViewById(R.id.buttonEventRegion);
+        filtrarRegiao.setOnClickListener(this::onRegionFilter);
 
         // TODO: Adicionar um "swipe to refresh"
 

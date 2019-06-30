@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,8 +34,9 @@ public class MainOngsFragment extends Fragment {
     private static final String TAG = MainOngsFragment.class.getSimpleName();
 
     private MainOngsViewModel mainOngsViewModel;
-
     private RecyclerView recyclerView;
+    private Button filtrarCategoria;
+    private Button filtrarRegiao;
 
     public static MainOngsFragment newInstance() {
         MainOngsFragment fragment = new MainOngsFragment();
@@ -55,7 +58,10 @@ public class MainOngsFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_ongs, container, false);
 
-        // TODO: Adicionar um "swipe to refresh"
+        filtrarCategoria = root.findViewById(R.id.buttonOngCategory);
+        filtrarCategoria.setOnClickListener(this::onCategoryFilter);
+        filtrarRegiao = root.findViewById(R.id.buttonOngRegion);
+        filtrarRegiao.setOnClickListener(this::onRegionFilter);
 
         // RecyclerView Config
         recyclerView = root.findViewById(R.id.recyclerOngs);
@@ -65,6 +71,14 @@ public class MainOngsFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
         return root;
+    }
+
+    private void onRegionFilter(View view) {
+
+    }
+
+    private void onCategoryFilter(View view) {
+
     }
 
     @Override

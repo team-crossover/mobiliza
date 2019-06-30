@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.event.MyEventsActivity"></activity>
+        <activity android:name=".ui.filteredsearch.FilterdActivity"></activity>
+        <activity android:name=".ui.event.MyEventsActivity" />
         <activity android:name=".ui.detailed.DetailedOngActivity" />
         <activity android:name=".ui.detailed.DetailedEventActivity" />
         <activity android:name=".ui.profile.GoogleProfileActivity" />
