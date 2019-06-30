@@ -19,6 +19,8 @@ import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
+import com.crossover.mobiliza.app.ui.main.MainActivity;
+import com.crossover.mobiliza.app.ui.main.MainEventsFragment;
 
 public class DetailedEventActivity extends AppCompatActivity {
 
@@ -165,11 +167,12 @@ public class DetailedEventActivity extends AppCompatActivity {
                     {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Evento deletado!", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Intent myIntent = new Intent(this, MainActivity.class);
+                        this.startActivity(myIntent);
                     },
                     errorMsg -> {
                         mProgressDialog.dismiss();
-//                        Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, this.getString(R.string.toast_delete_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
         } catch (Exception e) {
             mProgressDialog.dismiss();
