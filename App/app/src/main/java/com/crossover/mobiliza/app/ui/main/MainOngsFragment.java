@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
+import com.crossover.mobiliza.app.data.local.enums.CategoriaEnum;
+import com.crossover.mobiliza.app.data.local.enums.RegiaoEnum;
 import com.crossover.mobiliza.app.ui.detailed.DetailedOngActivity;
+import com.crossover.mobiliza.app.ui.filteredsearch.FilterdActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterOngs;
 import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
 
@@ -37,6 +41,7 @@ public class MainOngsFragment extends Fragment {
     private RecyclerView recyclerView;
     private Button filtrarCategoria;
     private Button filtrarRegiao;
+    private String selected;
 
     public static MainOngsFragment newInstance() {
         MainOngsFragment fragment = new MainOngsFragment();
@@ -73,12 +78,49 @@ public class MainOngsFragment extends Fragment {
         return root;
     }
 
-    private void onRegionFilter(View view) {
+    private void onCategoryFilter(View view) {
+
+        String[] options = CategoriaEnum.getAsArray();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Selecione uma categoria");
+        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
+
+        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(true));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
 
     }
 
-    private void onCategoryFilter(View view) {
+    private void onRegionFilter(View view) {
+        String[] options = RegiaoEnum.getAsArray();
 
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Selecione uma região");
+        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
+
+        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(false));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
+    }
+
+    private void startFiltrar(boolean isCategoria) {
+        Intent myIntent = new Intent(getContext(), FilterdActivity.class);
+        if (isCategoria) {
+            myIntent.putExtra("category", true);
+        }
+        myIntent.putExtra("filter", selected);
+        getContext().startActivity(myIntent);
     }
 
     @Override

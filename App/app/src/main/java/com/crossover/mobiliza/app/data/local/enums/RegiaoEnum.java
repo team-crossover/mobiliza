@@ -29,5 +29,18 @@ public enum RegiaoEnum {
         return this.text;
     }
 
+    public static String[] getAsArray(){
+        String[] array = new String[7];
+        array[0] = CENTRO.getText();
+        array[1] = LESTE.getText();
+        array[2] = NOROESTE.getText();
+        array[3] = NORTE.getText();
+        array[4] = OESTE.getText();
+        array[5] = SUDOESTE.getText();
+        array[6] = SUL.getText();
+
+        return array;
+
+    }
 
 }

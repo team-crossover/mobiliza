@@ -1,6 +1,8 @@
 package com.crossover.mobiliza.app.ui.main;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.local.enums.CategoriaEnum;
+import com.crossover.mobiliza.app.data.local.enums.RegiaoEnum;
 import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
 import com.crossover.mobiliza.app.ui.filteredsearch.FilterdActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
@@ -43,6 +46,7 @@ public class MainEventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private Button filtrarCategoria;
     private Button filtrarRegiao;
+    private String selected;
 
     public static MainEventsFragment newInstance() {
         MainEventsFragment fragment = new MainEventsFragment();
@@ -63,15 +67,49 @@ public class MainEventsFragment extends Fragment {
     }
 
     private void onCategoryFilter(View view) {
-        Intent myIntent = new Intent(getContext(), FilterdActivity.class);
-        myIntent.putExtra("isEvento", true);
-        myIntent.putExtra("category", true);
-        myIntent.putExtra("filter", CategoriaEnum.ANIMAIS.getText());
-        getContext().startActivity(myIntent);
+
+        String[] options = CategoriaEnum.getAsArray();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Selecione uma categoria");
+        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
+
+        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(true));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
+
     }
 
     private void onRegionFilter(View view) {
-        Toast.makeText(getContext(), "regiao", Toast.LENGTH_SHORT).show();
+        String[] options = RegiaoEnum.getAsArray();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Selecione uma região");
+        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
+
+        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(false));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
+    }
+
+    private void startFiltrar(boolean isCategoria) {
+        Intent myIntent = new Intent(getContext(), FilterdActivity.class);
+        myIntent.putExtra("isEvento", true);
+        if (isCategoria) {
+            myIntent.putExtra("category", true);
+        }
+        myIntent.putExtra("filter", selected);
+        getContext().startActivity(myIntent);
     }
 
     @Override

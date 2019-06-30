@@ -24,7 +24,6 @@ public class FilterdActivity extends AppCompatActivity {
 
         entidadeFiltrada = findViewById(R.id.textFilteredEntity);
         filtroAplicado = findViewById(R.id.textFilter);
-        tipoFiltro = findViewById(R.id.textTypeFilter);
 
         Intent intent = getIntent();
         //Intents: isEvento/isOng, category/region, filter
@@ -38,11 +37,11 @@ public class FilterdActivity extends AppCompatActivity {
 
         filtro = intent.getStringExtra("filter");
 
-        if (intent.hasExtra("category")){
+        if (intent.hasExtra("category")) {
             filtroAplicado.setText("Categoria " + filtro);
             isCategoria = true;
         } else {
-            filtroAplicado.setText(filtro);
+            filtroAplicado.setText("Região " + filtro);
             isCategoria = false;
         }
 

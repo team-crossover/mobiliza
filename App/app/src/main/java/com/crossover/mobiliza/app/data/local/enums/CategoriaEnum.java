@@ -27,4 +27,16 @@ public enum CategoriaEnum {
     public String getText() {
         return this.text;
     }
+
+    public static String[] getAsArray(){
+        String[] array = new String[6];
+        array[0] = ANIMAIS.getText();
+        array[1] = EDUCACAO.getText();
+        array[2] = ESPORTE.getText();
+        array[3] = HUMANITARIO.getText();
+        array[4] = MEIO_AMBIENTE.getText();
+        array[5] = TURISMO.getText();
+
+        return array;
+    }
 }
