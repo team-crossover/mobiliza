@@ -2,12 +2,12 @@ package com.crossover.mobiliza.app.ui.detailed;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +20,7 @@ import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.main.MainActivity;
-import com.crossover.mobiliza.app.ui.main.MainEventsFragment;
+import com.crossover.mobiliza.app.ui.utils.ImageUtils;
 
 public class DetailedEventActivity extends AppCompatActivity {
 
@@ -35,6 +35,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bConfirmPresenca;
     private Button bRemovePresenca;
     private Button bAddAgenda;
+    private ImageView imgView;
 
     private Long eventId;
     private String googleIdToken;
@@ -70,6 +71,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         bRemovePresenca = findViewById(R.id.bRemovePresence);
         qntConfirmados = findViewById(R.id.detailEventConfirmados);
         bAddAgenda = findViewById(R.id.buttonCalendar);
+        imgView = findViewById(R.id.detailEventImage);
 
         if (intent.hasExtra("idOwner")) {
             idOwner = intent.getLongExtra("idOwner", -1);
@@ -120,6 +122,18 @@ public class DetailedEventActivity extends AppCompatActivity {
                     }
                     bConfirmPresenca.setOnClickListener(this::onConfirmPresence);
                     bRemovePresenca.setOnClickListener(this::onRemovePresence);
+                }
+
+                // Imagem
+                if (evt.getImg() == null || evt.getImg().isEmpty()) {
+                    imgView.setImageBitmap(ImageUtils.getDefaultEventImg());
+                } else {
+                    try {
+                        imgView.setImageBitmap(ImageUtils.getBitmapFromBase64(evt.getImg()));
+                    } catch (Exception ex) {
+                        Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
+                        imgView.setImageBitmap(ImageUtils.getDefaultEventImg());
+                    }
                 }
 
                 /**

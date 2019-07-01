@@ -1,6 +1,10 @@
 package com.crossover.mobiliza.app.ui.profile;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,10 +24,16 @@ import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.local.enums.CategoriaEnum;
 import com.crossover.mobiliza.app.data.local.enums.RegiaoEnum;
 import com.crossover.mobiliza.app.data.remote.Resource;
+import com.crossover.mobiliza.app.ui.utils.ImageUtils;
+import com.crossover.mobiliza.app.ui.utils.PermissionUtils;
+
+import java.io.IOException;
 
 public class ProfileOngActivity extends AppCompatActivity {
 
     private static final String TAG = ProfileOngActivity.class.getSimpleName();
+    private static final int PICK_IMAGE = 452;
+    private static final int ACCEPT_PERMISSION = 453;
 
     private ProgressDialog mProgressDialog;
     private ProfileOngViewModel mViewModel;
@@ -34,6 +45,7 @@ public class ProfileOngActivity extends AppCompatActivity {
     private String regiao;
     private EditText telefoneText;
     private Button deleteBtn;
+    private ImageButton imgPerfilButton;
 
     private Spinner categoriaSpinner;
     private Spinner regiaoSpinner;
@@ -118,7 +130,6 @@ public class ProfileOngActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                regiao = new String();
                 regiao = regiaoSpinner.getSelectedItem().toString();
             }
 
@@ -130,10 +141,23 @@ public class ProfileOngActivity extends AppCompatActivity {
 
         telefoneText = findViewById(R.id.ongTelefoneText);
 
+        imgPerfilButton = findViewById(R.id.ongImgButton);
+        imgPerfilButton.setOnClickListener(this::onClickImg);
+
+        Button saveButton = findViewById(R.id.ongSaveButton);
+        saveButton.setOnClickListener(this::onSave);
+
+        Log.i(TAG, "onCreate: ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mViewModel.getOng(this).observe(this, ongResource -> {
             if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
                 Ong ong = ongResource.getData();
                 mProgressDialog.dismiss();
+                mViewModel.setOngImg(ong.getImgPerfil());
 
                 nameText.setVisibility(View.VISIBLE);
                 descText.setVisibility(View.VISIBLE);
@@ -159,6 +183,18 @@ public class ProfileOngActivity extends AppCompatActivity {
 
                 telefoneText.setText(ong.getTelefone());
 
+                //Imagem
+                if (mViewModel.getOngImg() == null || mViewModel.getOngImg().isEmpty()) {
+                    imgPerfilButton.setImageBitmap(ImageUtils.getDefaultOngImg());
+                } else {
+                    try {
+                        imgPerfilButton.setImageBitmap(ImageUtils.getBitmapFromBase64(mViewModel.getOngImg()));
+                    } catch (Exception ex) {
+                        Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
+                        imgPerfilButton.setImageBitmap(ImageUtils.getDefaultOngImg());
+                    }
+                }
+
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
 //                nameText.setVisibility(View.GONE);
 //                descText.setVisibility(View.GONE);
@@ -171,11 +207,13 @@ public class ProfileOngActivity extends AppCompatActivity {
                 Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
             }
         });
+        super.onStart();
+    }
 
-        Button saveButton = findViewById(R.id.ongSaveButton);
-        saveButton.setOnClickListener(this::onSave);
-
-        Log.i(TAG, "onCreate: ");
+    private void onClickImg(View view) {
+        if (PermissionUtils.startPermissionCheck(this, Manifest.permission.READ_EXTERNAL_STORAGE, ACCEPT_PERMISSION)) {
+            ImageUtils.startSelectImageIntent(this, PICK_IMAGE);
+        }
     }
 
     private void onSave(View view) {
@@ -189,7 +227,6 @@ public class ProfileOngActivity extends AppCompatActivity {
                     enderecoText.getText().toString(),
                     regiao,
                     telefoneText.getText().toString(),
-
                     newOng -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this.getApplicationContext(), this.getString(R.string.toast_save_success), Toast.LENGTH_LONG).show();
@@ -202,6 +239,43 @@ public class ProfileOngActivity extends AppCompatActivity {
         } catch (Exception ex) {
             mProgressDialog.dismiss();
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE) {
+            mProgressDialog.show();
+            if (data != null && resultCode == RESULT_OK) {
+                try {
+                    Bitmap bitmap = ImageUtils.getBitmapFromUri(this, data.getData());
+                    imgPerfilButton.setImageBitmap(bitmap);
+                    String base64 = ImageUtils.getImageBase64FromBitmap(bitmap, true, true);
+                    mViewModel.setNewOngImg(base64);
+                    mProgressDialog.dismiss();
+                } catch (IOException e) {
+                    Log.e(TAG, "onActivityResult: " + e.getMessage(), e);
+                    Toast.makeText(this, this.getString(R.string.toast_upload_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    mProgressDialog.dismiss();
+                }
+            } else {
+                Log.e(TAG, "onActivityResult: no data");
+                mProgressDialog.dismiss();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case ACCEPT_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Try to open image again
+                    onClickImg(imgPerfilButton);
+                }
+                return;
+            }
         }
     }
 

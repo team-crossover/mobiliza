@@ -29,6 +29,8 @@ public class Evento {
 
     private String dataRealizacao;
 
+    private String img;
+
     public Long getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class Evento {
 
     public void setIdOng(Long idOng) {
         this.idOng = idOng;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

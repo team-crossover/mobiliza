@@ -24,13 +24,16 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/detailEventImage"
                     android:layout_width="match_parent"
                     android:layout_height="148dp"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
             </androidx.cardview.widget.CardView>
 
             <TextView

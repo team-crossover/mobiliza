@@ -26,4 +26,6 @@
     <string name="action_google_info">Informações da conta</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="toast_delete_error">Não foi possível deletar</string>
+    <string name="text_select_img">Selecione a imagem</string>
+    <string name="toast_upload_error">Erro ao fazer upload</string>
 </resources>

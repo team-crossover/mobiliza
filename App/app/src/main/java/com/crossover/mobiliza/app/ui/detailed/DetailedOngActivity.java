@@ -1,20 +1,19 @@
 package com.crossover.mobiliza.app.ui.detailed;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
+import com.crossover.mobiliza.app.ui.utils.ImageUtils;
 
 public class DetailedOngActivity extends AppCompatActivity {
 
@@ -53,6 +52,7 @@ public class DetailedOngActivity extends AppCompatActivity {
         emailOng = findViewById(R.id.detailOngEmail);
         enderecoOng = findViewById(R.id.detailOngAddress);
         regiaoOng = findViewById(R.id.detailOngRegion);
+        fotoOng = findViewById(R.id.detailedOngPicture);
 
         mViewModel.getOng(this).observe(this, ongResource -> {
             if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
@@ -66,6 +66,18 @@ public class DetailedOngActivity extends AppCompatActivity {
                 emailOng.setText(ong.getEmail());
                 enderecoOng.setText(ong.getEndereco());
                 regiaoOng.setText(ong.getRegiao());
+
+                // Imagem
+                if (ong.getImgPerfil() == null || ong.getImgPerfil().isEmpty()) {
+                    fotoOng.setImageBitmap(ImageUtils.getDefaultOngImg());
+                } else {
+                    try {
+                        fotoOng.setImageBitmap(ImageUtils.getBitmapFromBase64(ong.getImgPerfil()));
+                    } catch (Exception ex) {
+                        Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
+                        fotoOng.setImageBitmap(ImageUtils.getDefaultOngImg());
+                    }
+                }
 
             } else if (ongResource.getStatus() == Resource.Status.LOADING) {
                 mProgressDialog.show();

@@ -23,6 +23,8 @@ public class Ong {
 
     private String regiao;
 
+    private String imgPerfil;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +87,13 @@ public class Ong {
 
     public void setRegiao(String regiao) {
         this.regiao = regiao;
+    }
+
+    public String getImgPerfil() {
+        return imgPerfil;
+    }
+
+    public void setImgPerfil(String imgPerfil) {
+        this.imgPerfil = imgPerfil;
     }
 }

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
-import com.crossover.mobiliza.app.data.remote.repository.OngRepository;
 
 import java.util.Calendar;
 
@@ -17,6 +16,23 @@ public class AddEventViewModel extends ViewModel {
 
     private long mEventId = -1;
     private String mGoogleIdToken = null;
+
+    private String mEventImg = null;
+    private boolean mChangedImg = false;
+
+    public void setEventImg(String mOngImg) {
+        if (!this.mChangedImg)
+            this.mEventImg = mOngImg;
+    }
+
+    public void setNewEventImg(String ongImg) {
+        this.mChangedImg = true;
+        this.mEventImg = ongImg;
+    }
+
+    public String getEventImg() {
+        return mEventImg;
+    }
 
     public void setEventoId(long id) {
         mEventId = id;
@@ -41,7 +57,7 @@ public class AddEventViewModel extends ViewModel {
         evt.setDescricao(descricao);
         evt.setDataRealizacao(data);
         evt.setRegiao(regiao);
-
+        evt.setImg(getEventImg());
         EventoRepository.getInstance(context).save(evt, mGoogleIdToken, onSuccess, onFailure);
 
     }

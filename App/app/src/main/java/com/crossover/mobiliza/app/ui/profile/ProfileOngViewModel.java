@@ -1,6 +1,7 @@
 package com.crossover.mobiliza.app.ui.profile;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.core.util.Consumer;
 import androidx.lifecycle.LiveData;
@@ -15,13 +16,31 @@ public class ProfileOngViewModel extends ViewModel {
     private long mOngId = -1;
     private String mGoogleIdToken = null;
 
+    private String mOngImg = null;
+    private boolean mChangedImg = false;
+
     public void setOngId(long id) {
         mOngId = id;
+    }
+
+    public void setOngImg(String mOngImg) {
+        if (!this.mChangedImg)
+            this.mOngImg = mOngImg;
+    }
+
+    public void setNewOngImg(String ongImg) {
+        this.mChangedImg = true;
+        this.mOngImg = ongImg;
+    }
+
+    public String getOngImg() {
+        return mOngImg;
     }
 
     public void setGoogleIdToken(String googleIdToken) {
         mGoogleIdToken = googleIdToken;
     }
+
 
     public LiveData<Resource<Ong>> getOng(Context context) {
         return OngRepository.getInstance(context).findById(mOngId);
@@ -46,7 +65,8 @@ public class ProfileOngViewModel extends ViewModel {
         ong.setEndereco(endereco);
         ong.setRegiao(regiao);
         ong.setTelefone(telefone);
-
+        ong.setImgPerfil(mOngImg);
+        Log.e("AAAAAAAAAA", "saveOng: " + mOngImg);
         OngRepository.getInstance(context).save(ong, mGoogleIdToken, onSuccess, onFailure);
     }
 }

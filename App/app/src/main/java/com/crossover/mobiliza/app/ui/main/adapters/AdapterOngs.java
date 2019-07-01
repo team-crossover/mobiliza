@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.main.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
+import com.crossover.mobiliza.app.ui.main.MainActivity;
+import com.crossover.mobiliza.app.ui.utils.ImageUtils;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
 public class AdapterOngs extends RecyclerView.Adapter<AdapterOngs.OngViewHolder> {
+
+    private static final String TAG = AdapterOngs.class.getSimpleName();
 
     private List<Ong> listaOngs;
 
@@ -43,6 +49,17 @@ public class AdapterOngs extends RecyclerView.Adapter<AdapterOngs.OngViewHolder>
         holder.categoria.setText(ong.getCategoria());
         holder.descricao.setText(ong.getDescricao());
 
+        // Imagem
+        if (ong.getImgPerfil() == null || ong.getImgPerfil().isEmpty()) {
+            holder.pic.setImageBitmap(ImageUtils.getDefaultOngImg());
+        } else {
+            try {
+                holder.pic.setImageBitmap(ImageUtils.getBitmapFromBase64(ong.getImgPerfil()));
+            } catch (Exception ex) {
+                Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
+                holder.pic.setImageBitmap(ImageUtils.getDefaultOngImg());
+            }
+        }
     }
 
     @Override
