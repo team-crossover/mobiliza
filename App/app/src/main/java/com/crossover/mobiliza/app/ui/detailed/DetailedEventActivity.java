@@ -52,6 +52,11 @@ public class DetailedEventActivity extends AppCompatActivity {
     private String enderecoEvento;
     private Calendar dataEvento;
 
+    private TextView descEventoTV;
+    private TextView regiaoEventoTV;
+    private TextView enderecoEventoTV;
+    private TextView dataEventoTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +87,11 @@ public class DetailedEventActivity extends AppCompatActivity {
         qntConfirmados = findViewById(R.id.detailEventConfirmados);
         bAddAgenda = findViewById(R.id.buttonCalendar);
         imgView = findViewById(R.id.detailEventImage);
+
+        descEventoTV = findViewById(R.id.detailEventDescription);
+        regiaoEventoTV = findViewById(R.id.detailEventRegion);
+        enderecoEventoTV = findViewById(R.id.detailEventAddress);
+        dataEventoTV = findViewById(R.id.detailEventDate);
 
         if (intent.hasExtra("idOwner")) {
             idOwner = intent.getLongExtra("idOwner", -1);
@@ -129,6 +139,14 @@ public class DetailedEventActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
                 nomeEvento.setVisibility(View.VISIBLE);
                 nomeEvento.setText(evt.getNome());
+                descEventoTV.setVisibility(View.VISIBLE);
+                descEventoTV.setText(evt.getDescricao());
+                regiaoEventoTV.setVisibility(View.VISIBLE);
+                regiaoEventoTV.setText(evt.getRegiao());
+                enderecoEventoTV.setVisibility(View.VISIBLE);
+                enderecoEventoTV.setText(evt.getEndereco());
+                dataEventoTV.setVisibility(View.VISIBLE);
+                dataEventoTV.setText(evt.getDataRealizacao());
 
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);

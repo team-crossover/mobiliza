@@ -108,15 +108,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp" >
+                android:layout_marginBottom="5dp" >
 
                 <TextView
                     android:id="@+id/detailEventTextConfirmados"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Quantidade de confirmados: " />
+                    android:text="Quantidade de confirmados: "
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailEventConfirmados"
@@ -128,6 +128,80 @@
                     android:text="TextView" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Descrição"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailEventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="descrição do evento"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Região"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailEventRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="região do evento"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Endereço"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailEventAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="endereço do evento"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Data de realização"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailEventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data do evento"
+                android:layout_marginBottom="30dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
         </LinearLayout>
     </ScrollView>
 
