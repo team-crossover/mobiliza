@@ -66,24 +66,24 @@ public class MainEventsFragment extends Fragment {
 
     }
 
-//    private void onCategoryFilter(View view) {
-//
-//        String[] options = CategoriaEnum.getAsArray();
-//
-//        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-//
-//        alert.setTitle("Selecione uma categoria");
-//        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
-//
-//        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(true));
-//        alert.setNegativeButton("Cancelar", (dialog, which) -> {
-//            return;
-//        });
-//
-//        alert.create();
-//        alert.show();
-//
-//    }
+    private void onCategoryFilter(View view) {
+
+        String[] options = CategoriaEnum.getAsArray();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Selecione uma categoria");
+        alert.setSingleChoiceItems(options, -1, (dialog, which) -> selected = options[which]);
+
+        alert.setPositiveButton("Confirmar", (dialog, which) -> startFiltrar(true));
+        alert.setNegativeButton("Cancelar", (dialog, which) -> {
+            return;
+        });
+
+        alert.create();
+        alert.show();
+
+    }
 
     private void onRegionFilter(View view) {
         String[] options = RegiaoEnum.getAsArray();
@@ -119,8 +119,7 @@ public class MainEventsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main_eventos, container, false);
 
         filtrarCategoria = root.findViewById(R.id.buttonEventCategory);
-//        filtrarCategoria.setOnClickListener(this::onCategoryFilter);
-        filtrarCategoria.setVisibility(View.GONE);
+        filtrarCategoria.setOnClickListener(this::onCategoryFilter);
         filtrarRegiao = root.findViewById(R.id.buttonEventRegion);
         filtrarRegiao.setOnClickListener(this::onRegionFilter);
 

@@ -8,10 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="003e2a19-0284-49f1-89e5-d6e643a2fad7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilterdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilterdActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterOngs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterOngs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/adapter_events_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/adapter_events_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/adapter_ongs_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/adapter_ongs_list.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,95 +37,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
-              <folding>
-                <element signature="e#8633#8674#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/MyEventsViewModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="27" column="5" selection-start-line="25" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/adapter_events_list.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
             </state>
           </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilterdActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-              <folding>
-                <element signature="e#1947#1983#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainOngsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="167" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/entity/Evento.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/entity/Ong.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1065">
-              <caret line="121" column="70" selection-start-line="121" selection-start-column="70" selection-end-line="121" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/AddEventActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="69" column="104" lean-forward="true" selection-start-line="69" selection-start-column="104" selection-end-line="69" selection-end-column="104" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/MyEventsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-112">
-              <caret line="65" column="49" lean-forward="true" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+            <state relative-caret-position="452">
+              <caret line="162" column="58" selection-start-line="162" selection-start-column="58" selection-end-line="162" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterEvents.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="57" selection-start-line="57" selection-end-line="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/adapter_ongs_list.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="51" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterOngs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="131" column="43" lean-forward="true" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -124,11 +109,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="540">
+              <caret line="36" column="9" lean-forward="true" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/ProfileOngActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="134" column="48" lean-forward="true" selection-start-line="132" selection-start-column="7" selection-end-line="134" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/ProfileOngViewModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -147,6 +150,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>setResult</find>
+      <find>getOn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,7 +160,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/AddEventActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_google_profile.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/GoogleProfileActivity.java" />
@@ -171,10 +174,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/enums/CategoriaEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/enums/RegiaoEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainOngsFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/adapter_events_list.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterEvents.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/adapter_ongs_list.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterOngs.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilterdActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java" />
       </list>
     </option>
   </component>
@@ -192,8 +202,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -218,56 +226,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="enums" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="detailed" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="app" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="event" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="App" type="1abcf292:AndroidViewProjectNode" />
@@ -306,14 +265,14 @@
             </path>
             <path>
               <item name="App" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -425,7 +384,7 @@
     <frame x="0" y="25" width="1920" height="1004" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20597652" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2673426" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -433,16 +392,16 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Find" weight="0.32914287" />
-      <window_info anchor="bottom" id="Run" order="0" visible="true" weight="0.17714286" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.4617143" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.4822857" />
+      <window_info anchor="bottom" id="Terminal" order="4" weight="0.48118585" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.3165714" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.13714285" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.32914287" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -544,17 +503,6 @@
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/ProfileOngActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="73" column="21" selection-start-line="73" selection-end-line="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_main_eventos.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -564,10 +512,6 @@
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_main_ongs.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
@@ -621,9 +565,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="169" column="77" selection-start-line="169" selection-start-column="77" selection-end-line="169" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/MyEventsViewModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="210">
           <caret line="27" column="5" selection-start-line="25" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -631,10 +582,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/entity/Ong.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainOngsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state relative-caret-position="1515">
+          <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="167" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -645,64 +596,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainOngsFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/data/local/entity/Ong.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="167" selection-end-column="11" />
+        <state relative-caret-position="240">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/AddEventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="69" column="104" selection-start-line="69" selection-start-column="104" selection-end-line="69" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/MyEventsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_detailed_event.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
+          <folding>
+            <element signature="e#3769#3796#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_detailed_ong.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/adapter_events_list.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterEvents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/adapter_ongs_list.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="51" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/adapters/AdapterOngs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="9" lean-forward="true" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/ProfileOngViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/profile/ProfileOngActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="134" column="48" lean-forward="true" selection-start-line="132" selection-start-column="7" selection-end-line="134" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilterdActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="452">
+          <caret line="162" column="58" selection-start-line="162" selection-start-column="58" selection-end-line="162" selection-end-column="58" />
           <folding>
-            <element signature="e#1947#1983#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/main/MainEventsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="121" column="70" selection-start-line="121" selection-start-column="70" selection-end-line="121" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/AddEventActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="69" column="104" lean-forward="true" selection-start-line="69" selection-start-column="104" selection-end-line="69" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/filteredsearch/FilteredViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/event/MyEventsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="65" column="49" lean-forward="true" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/crossover/mobiliza/app/ui/detailed/DetailedEventActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
-          <folding>
-            <element signature="e#8633#8674#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="353">
+          <caret line="131" column="43" lean-forward="true" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
         </state>
       </provider>
     </entry>

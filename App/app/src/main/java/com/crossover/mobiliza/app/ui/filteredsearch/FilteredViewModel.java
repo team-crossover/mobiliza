@@ -25,6 +25,10 @@ public class FilteredViewModel extends ViewModel {
         return OngRepository.getInstance(context).findAll();
     }
 
+    public LiveData<Resource<Ong>> getOngById(Context context, Long idOng) {
+        return OngRepository.getInstance(context).findById(idOng);
+    }
+
     public User getCurrentUser(){
         if (MainActivity.getUser() != null) {
             return MainActivity.getUser();

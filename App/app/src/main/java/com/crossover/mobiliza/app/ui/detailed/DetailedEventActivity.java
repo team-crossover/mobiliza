@@ -34,6 +34,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private LinearLayout volunteerOptions;
     private Button bConfirmPresenca;
     private Button bRemovePresenca;
+    private Button bAddAgenda;
 
     private Long eventId;
     private String googleIdToken;
@@ -68,6 +69,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         bConfirmPresenca = findViewById(R.id.bConfirmPresence);
         bRemovePresenca = findViewById(R.id.bRemovePresence);
         qntConfirmados = findViewById(R.id.detailEventConfirmados);
+        bAddAgenda = findViewById(R.id.buttonCalendar);
 
         if (intent.hasExtra("idOwner")) {
             idOwner = intent.getLongExtra("idOwner", -1);

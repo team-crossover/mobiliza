@@ -18,6 +18,7 @@ import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.local.entity.User;
+import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
 import com.crossover.mobiliza.app.ui.detailed.DetailedOngActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
@@ -148,9 +149,22 @@ public class FilterdActivity extends AppCompatActivity {
                 List<Evento> eventos = new ArrayList<>();
                 Calendar now = Calendar.getInstance();
                 for (Evento evt : listResource.getData()) {
-                    if (!evt.getDataRealizacaoAsCalendar().before(now) && evt.getRegiao().equals(filtro)) {
-                        eventos.add(evt);
+                    if (!evt.getDataRealizacaoAsCalendar().before(now)) {
+                        if (isCategoria) {
+                            myViewModel.getOngById(getApplicationContext(), evt.getIdOng()).observe(this, ongResource -> {
+                                if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
+                                    Ong ong = ongResource.getData();
+                                    if (ong.getCategoria().equals(filtro)) {
+                                        eventos.add(evt);
+                                    }
+                                }
+                            });
+                        } else {
+                            if (evt.getRegiao().equals(filtro))
+                                eventos.add(evt);
+                        }
                     }
+
                 }
 
                 // Adapter Config

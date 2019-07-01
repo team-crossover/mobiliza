@@ -3,6 +3,7 @@ package com.crossover.mobiliza.app.ui.main.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,8 +40,8 @@ public class AdapterOngs extends RecyclerView.Adapter<AdapterOngs.OngViewHolder>
     public void onBindViewHolder(@NonNull OngViewHolder holder, int position) {
         Ong ong = listaOngs.get(position);
         holder.nome.setText(ong.getNome());
-        holder.descrição.setText(ong.getDescricao());
         holder.categoria.setText(ong.getCategoria());
+        holder.descricao.setText(ong.getDescricao());
 
     }
 
@@ -52,15 +53,17 @@ public class AdapterOngs extends RecyclerView.Adapter<AdapterOngs.OngViewHolder>
     public class OngViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nome;
-        private TextView descrição;
         private TextView categoria;
+        private TextView descricao;
+        private ImageView pic;
 
         public OngViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nome = itemView.findViewById(R.id.textNomeOng);
-            descrição = itemView.findViewById(R.id.textDescricaoOng);
             categoria = itemView.findViewById(R.id.textCategoriaOng);
+            descricao = itemView.findViewById(R.id.textDescricaoOng);
+            pic = itemView.findViewById(R.id.adapterOngImage);
         }
     }
 }

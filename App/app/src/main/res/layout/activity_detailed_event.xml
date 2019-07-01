@@ -6,95 +6,122 @@
     android:layout_height="match_parent"
     tools:context=".ui.detailed.DetailedEventActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">>
 
         <LinearLayout
-            android:id="@+id/ongOwnerOptions"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/buttonEditEvent"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Editar" />
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/buttonDeletEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Deletar" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/detailEventImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="148dp"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/volunteerOptions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/detailEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="nome evento"
+                android:textSize="36dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ongOwnerOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonEditEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Editar" />
+
+                <Button
+                    android:id="@+id/buttonDeletEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Deletar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/volunteerOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/bConfirmPresence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Confirmar presença" />
+
+                    <Button
+                        android:id="@+id/bRemovePresence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/appbar_padding_top"
+                        android:background="@android:color/holo_red_light"
+                        android:text="Remover presença" />
+
+                    <Button
+                        android:id="@+id/buttonCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_event_note_black_24dp"
+                        android:text="Adicionar à agenda" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/bConfirmPresence"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/detailEventTextConfirmados"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="Confirmar presença" />
+                    android:text="Quantidade de confirmados: " />
 
-                <Button
-                    android:id="@+id/bRemovePresence"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/detailEventConfirmados"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_light"
-                    android:text="Remover presença" />
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="TextView" />
+
             </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/detailEventName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="nome evento" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/detailEventTextConfirmados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quantidade de confirmados: " />
-
-            <TextView
-                android:id="@+id/detailEventConfirmados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="TextView" />
-
-        </LinearLayout>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
