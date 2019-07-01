@@ -20,14 +20,23 @@ import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.main.MainActivity;
+import com.crossover.mobiliza.app.ui.utils.CalendarUtils;
 import com.crossover.mobiliza.app.ui.utils.ImageUtils;
+
+import java.util.Calendar;
 
 public class DetailedEventActivity extends AppCompatActivity {
 
     private static final String TAG = DetailedEventActivity.class.getSimpleName();
 
+    private Long eventId;
+    private String googleIdToken;
+    private Long idOwner;
+    private Long idVoluntario;
+
     private ProgressDialog mProgressDialog;
     private DetailedEventViewModel mViewModel;
+
     private TextView nomeEvento;
     private TextView qntConfirmados;
     private LinearLayout ownerOptions;
@@ -37,10 +46,11 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bAddAgenda;
     private ImageView imgView;
 
-    private Long eventId;
-    private String googleIdToken;
-    private Long idOwner;
-    private Long idVoluntario;
+    // TODO: Trocar esses pelos Views quando a tela toda for feita
+    private String descEvento;
+    private String regiaoEvento;
+    private String enderecoEvento;
+    private Calendar dataEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +97,26 @@ public class DetailedEventActivity extends AppCompatActivity {
             volunteerOptions.setVisibility(LinearLayout.GONE);
         }
 
+        bAddAgenda.setOnClickListener(this::onAddAgenda);
+
         Button editarEvento = findViewById(R.id.buttonEditEvent);
         Button deletarEvento = findViewById(R.id.buttonDeletEvent);
         editarEvento.setOnClickListener(this::onEdit);
         deletarEvento.setOnClickListener(this::onConfirmDelete);
 
         Log.i(TAG, "onCreate: ");
+    }
+
+    private void onAddAgenda(View view) {
+        String local = regiaoEvento == null ? "" : regiaoEvento;
+        if (enderecoEvento != null) local += "\n" + enderecoEvento;
+        long milis = dataEvento == null ? Calendar.getInstance().getTimeInMillis() : dataEvento.getTimeInMillis();
+
+        CalendarUtils.startAddEventIntent(this,
+                nomeEvento.getText().toString(),
+                descEvento,
+                local,
+                milis);
     }
 
     @Override
@@ -139,6 +163,10 @@ public class DetailedEventActivity extends AppCompatActivity {
                 /**
                  * TODO: Demais informações do evento
                  */
+                descEvento = evt.getDescricao();
+                regiaoEvento = evt.getRegiao();
+                enderecoEvento = evt.getEndereco();
+                dataEvento = evt.getDataRealizacaoAsCalendar();
 
             } else if (eventoResource.getStatus() == Resource.Status.LOADING) {
                 mProgressDialog.show();

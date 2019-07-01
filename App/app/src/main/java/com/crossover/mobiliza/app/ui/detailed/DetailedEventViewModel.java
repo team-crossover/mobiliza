@@ -1,7 +1,6 @@
 package com.crossover.mobiliza.app.ui.detailed;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.core.util.Consumer;
 import androidx.lifecycle.LiveData;

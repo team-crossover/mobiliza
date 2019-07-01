@@ -28,4 +28,5 @@
     <string name="toast_delete_error">Não foi possível deletar</string>
     <string name="text_select_img">Selecione a imagem</string>
     <string name="toast_upload_error">Erro ao fazer upload</string>
+    <string name="toast_add_agenda_error">Erro ao adicionar à agenda</string>
 </resources>
