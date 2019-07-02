@@ -46,7 +46,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bAddAgenda;
     private ImageView imgView;
 
-    // TODO: Trocar esses pelos Views quando a tela toda for feita
+    // Agenda
     private String descEvento;
     private String regiaoEvento;
     private String enderecoEvento;
@@ -178,9 +178,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                     }
                 }
 
-                /**
-                 * TODO: Demais informações do evento
-                 */
                 descEvento = evt.getDescricao();
                 regiaoEvento = evt.getRegiao();
                 enderecoEvento = evt.getEndereco();
@@ -250,8 +247,8 @@ public class DetailedEventActivity extends AppCompatActivity {
                     {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença confirmada!", Toast.LENGTH_SHORT).show();
-//                        bConfirmPresenca.setVisibility(View.GONE);
-//                        bRemovePresenca.setVisibility(View.VISIBLE);
+                        bConfirmPresenca.setVisibility(View.GONE);
+                        bRemovePresenca.setVisibility(View.VISIBLE);
                         recreate();
                     },
                     errorMsg -> {
@@ -272,8 +269,9 @@ public class DetailedEventActivity extends AppCompatActivity {
                     {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença removida", Toast.LENGTH_SHORT).show();
-//                        bConfirmPresenca.setVisibility(View.VISIBLE);
-//                        bRemovePresenca.setVisibility(View.GONE);
+                        bRemovePresenca.setVisibility(View.GONE);
+                        bConfirmPresenca.setVisibility(View.VISIBLE);
+
                         recreate();
                     },
                     errorMsg -> {
