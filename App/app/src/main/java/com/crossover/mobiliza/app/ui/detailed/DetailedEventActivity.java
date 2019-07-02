@@ -248,7 +248,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença confirmada!", Toast.LENGTH_SHORT).show();
                         bConfirmPresenca.setVisibility(View.GONE);
-                        bRemovePresenca.setVisibility(View.VISIBLE);
                         recreate();
                     },
                     errorMsg -> {
@@ -270,8 +269,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, "Presença removida", Toast.LENGTH_SHORT).show();
                         bRemovePresenca.setVisibility(View.GONE);
-                        bConfirmPresenca.setVisibility(View.VISIBLE);
-
                         recreate();
                     },
                     errorMsg -> {
