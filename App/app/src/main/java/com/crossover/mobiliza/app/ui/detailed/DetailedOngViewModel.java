@@ -17,6 +17,10 @@ public class DetailedOngViewModel extends ViewModel {
         mOngId = id;
     }
 
+    public long getOngId() {
+        return mOngId;
+    }
+
     public LiveData<Resource<Ong>> getOng(Context context) {
         return OngRepository.getInstance(context).findById(mOngId);
     }

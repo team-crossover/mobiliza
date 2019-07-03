@@ -1,8 +1,11 @@
 package com.crossover.mobiliza.app.ui.detailed;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
+import com.crossover.mobiliza.app.ui.event.MyEventsActivity;
 import com.crossover.mobiliza.app.ui.utils.ImageUtils;
 
 public class DetailedOngActivity extends AppCompatActivity {
@@ -29,6 +33,7 @@ public class DetailedOngActivity extends AppCompatActivity {
     private TextView enderecoOng;
     private TextView regiaoOng;
     private ImageView fotoOng;
+    private Button bVerEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,8 @@ public class DetailedOngActivity extends AppCompatActivity {
         enderecoOng = findViewById(R.id.detailOngAddress);
         regiaoOng = findViewById(R.id.detailOngRegion);
         fotoOng = findViewById(R.id.detailedOngPicture);
+        bVerEvento = findViewById(R.id.buttonEventOng);
+        bVerEvento.setOnClickListener(this::showEventsFromOng);
 
         mViewModel.getOng(this).observe(this, ongResource -> {
             if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
@@ -90,4 +97,12 @@ public class DetailedOngActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate: ");
     }
+
+    private void showEventsFromOng(View view) {
+        Intent myIntent = new Intent(this, MyEventsActivity.class);
+        myIntent.putExtra("idOng", mViewModel.getOngId());
+        myIntent.putExtra("googleIdToken", " ");
+        this.startActivity(myIntent);
+    }
+
 }
