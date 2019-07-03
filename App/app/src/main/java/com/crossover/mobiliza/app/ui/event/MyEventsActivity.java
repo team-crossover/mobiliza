@@ -117,8 +117,8 @@ public class MyEventsActivity extends AppCompatActivity {
     private void noEventsYet() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle("Você ainda não possui nenhum evento");
-        alert.setMessage("Crie eventos e eles aparecerão aqui");
+        alert.setTitle("Esta ONG não possui eventos criados");
+        alert.setMessage("Eventos criados serão listados aqui");
         alert.setIcon(android.R.drawable.ic_dialog_info);
         alert.setCancelable(false);
 
