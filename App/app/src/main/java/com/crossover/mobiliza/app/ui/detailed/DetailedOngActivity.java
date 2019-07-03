@@ -101,7 +101,6 @@ public class DetailedOngActivity extends AppCompatActivity {
     private void showEventsFromOng(View view) {
         Intent myIntent = new Intent(this, MyEventsActivity.class);
         myIntent.putExtra("idOng", mViewModel.getOngId());
-        myIntent.putExtra("googleIdToken", " ");
         this.startActivity(myIntent);
     }
 

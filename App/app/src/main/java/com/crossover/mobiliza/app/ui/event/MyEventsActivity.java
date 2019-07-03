@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
 import com.crossover.mobiliza.app.ui.utils.RecyclerItemClickListener;
@@ -43,7 +44,9 @@ public class MyEventsActivity extends AppCompatActivity {
         mProgressDialog.setCancelable(false);
 
         ongId = getIntent().getLongExtra("idOng", -1);
-        googleIdToken = getIntent().getStringExtra("googleIdToken");
+        if(getIntent().hasExtra("googleIdToken")){
+            googleIdToken = getIntent().getStringExtra("googleIdToken");
+        }
         if (ongId < 0) {
             this.finish();
             return;
@@ -90,10 +93,20 @@ public class MyEventsActivity extends AppCompatActivity {
                                 this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
+                                User user = myEventsViewModel.getCurrentUser();
                                 Evento evento = ((AdapterEvents) recyclerView.getAdapter()).getEvento(position);
                                 Intent myIntent = new Intent(getApplicationContext(), DetailedEventActivity.class);
-                                myIntent.putExtra("idOwner", ongId);
-                                myIntent.putExtra("googleIdToken", googleIdToken);
+
+                                if (user != null) {
+                                    if (user.isLastUsedAsOng()) {
+                                        if (evento.getIdOng() == user.getIdOng()) {
+                                            myIntent.putExtra("idOwner", user.getId());
+                                        }
+                                    } else {
+                                        myIntent.putExtra("idVoluntario", user.getIdVoluntario());
+                                    }
+                                    myIntent.putExtra("googleIdToken", user.getGoogleIdToken());
+                                }
                                 myIntent.putExtra("idEvent", evento.getId());
 
                                 getApplicationContext().startActivity(myIntent);
@@ -117,7 +130,7 @@ public class MyEventsActivity extends AppCompatActivity {
     private void noEventsYet() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle("Esta ONG não possui eventos criados");
+        alert.setTitle("Nenhum evento disponível");
         alert.setMessage("Eventos criados serão listados aqui");
         alert.setIcon(android.R.drawable.ic_dialog_info);
         alert.setCancelable(false);

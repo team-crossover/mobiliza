@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.entity.User;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
+import com.crossover.mobiliza.app.ui.main.MainActivity;
 
 import java.util.List;
 
@@ -25,5 +27,14 @@ public class MyEventsViewModel extends ViewModel {
 
     public LiveData<Resource<List<Evento>>> findMyEventos(Context context) {
         return EventoRepository.getInstance(context).findAllByOng(ongId);
+    }
+
+    public User getCurrentUser(){
+        if (MainActivity.getUser() != null) {
+            return MainActivity.getUser();
+        } else {
+            return null;
+        }
+
     }
 }

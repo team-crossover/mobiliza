@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.main.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.ui.utils.ImageUtils;
 
 import java.util.List;
 
 public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewHolder> {
+
+    private static final String TAG = AdapterOngs.class.getSimpleName();
 
     private List<Evento> listaEventos;
 
@@ -43,6 +47,18 @@ public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewH
         holder.data.setText(evt.getDataRealizacao());
         holder.descrição.setText(evt.getDescricao());
 
+        // Imagem
+        if (evt.getImg() == null || evt.getImg().isEmpty()) {
+            holder.pic.setImageBitmap(ImageUtils.getDefaultEventImg());
+        } else {
+            try {
+                holder.pic.setImageBitmap(ImageUtils.getBitmapFromBase64(evt.getImg()));
+            } catch (Exception ex) {
+                Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
+                holder.pic.setImageBitmap(ImageUtils.getDefaultEventImg());
+            }
+        }
+
     }
 
     @Override
@@ -55,6 +71,7 @@ public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewH
         private TextView nome;
         private TextView descrição;
         private TextView data;
+        private ImageView pic;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +79,7 @@ public class AdapterEvents extends RecyclerView.Adapter<AdapterEvents.EventViewH
             nome = itemView.findViewById(R.id.textNome);
             data = itemView.findViewById(R.id.textData);
             descrição = itemView.findViewById(R.id.textDescricao);
+            pic = itemView.findViewById(R.id.adapterEventImage);
         }
     }
 }

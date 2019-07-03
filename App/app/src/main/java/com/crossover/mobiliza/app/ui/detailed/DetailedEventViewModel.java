@@ -10,6 +10,7 @@ import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.data.remote.repository.EventoRepository;
+import com.crossover.mobiliza.app.data.remote.repository.OngRepository;
 
 public class DetailedEventViewModel extends ViewModel {
 
@@ -41,4 +42,7 @@ public class DetailedEventViewModel extends ViewModel {
         EventoRepository.getInstance(context).deletarEvento(mEventId, mGoogleIdToken, onSuccess, onFailure);
     }
 
+    public LiveData<Resource<Ong>> getOng(Context context, long idOng) {
+        return OngRepository.getInstance(context).findById(idOng);
+    }
 }

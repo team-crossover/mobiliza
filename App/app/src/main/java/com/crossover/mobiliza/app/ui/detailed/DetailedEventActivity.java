@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
+import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.event.AddEventActivity;
 import com.crossover.mobiliza.app.ui.main.MainActivity;
@@ -24,6 +25,7 @@ import com.crossover.mobiliza.app.ui.utils.CalendarUtils;
 import com.crossover.mobiliza.app.ui.utils.ImageUtils;
 
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DetailedEventActivity extends AppCompatActivity {
 
@@ -45,6 +47,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bRemovePresenca;
     private Button bAddAgenda;
     private ImageView imgView;
+    private TextView ongName;
 
     // Agenda
     private String descEvento;
@@ -87,6 +90,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         qntConfirmados = findViewById(R.id.detailEventConfirmados);
         bAddAgenda = findViewById(R.id.buttonCalendar);
         imgView = findViewById(R.id.detailEventImage);
+        ongName = findViewById(R.id.textOngOfEvent);
 
         descEventoTV = findViewById(R.id.detailEventDescription);
         regiaoEventoTV = findViewById(R.id.detailEventRegion);
@@ -147,6 +151,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 enderecoEventoTV.setText(evt.getEndereco());
                 dataEventoTV.setVisibility(View.VISIBLE);
                 dataEventoTV.setText(evt.getDataRealizacao());
+                getOngName(evt.getIdOng());
 
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);
@@ -279,5 +284,22 @@ public class DetailedEventActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void getOngName(Long idOng) {
+        mViewModel.getOng(this, idOng).observe(this, ongResource -> {
+            if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
+                Ong ong = ongResource.getData();
+                ongName.setVisibility(View.VISIBLE);
+                ongName.setText(ong.getNome());
+
+            } else if (ongResource.getStatus() == Resource.Status.LOADING) {
+                mProgressDialog.show();
+
+            } else if (ongResource.getStatus() == Resource.Status.ERROR) {
+                mProgressDialog.dismiss();
+                Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

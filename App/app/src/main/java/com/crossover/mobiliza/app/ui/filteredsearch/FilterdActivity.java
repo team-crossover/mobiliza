@@ -1,5 +1,6 @@
 package com.crossover.mobiliza.app.ui.filteredsearch;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -98,6 +99,11 @@ public class FilterdActivity extends AppCompatActivity {
         myViewModel.findAllOngs(this).observe(this, listResource -> {
             if (listResource.getData() != null) {
                 List<Ong> ongs = new ArrayList<>();
+
+                //Possui resultados:
+                if (ongs.size() <= 0)
+                    noResults();
+
                 for (Ong ong : listResource.getData()) {
                     if (isCategoria) {
                         if (ong.getCategoria().equals(filtro))
@@ -147,6 +153,11 @@ public class FilterdActivity extends AppCompatActivity {
             if (listResource.getData() != null) {
                 mProgressDialog.show();
                 List<Evento> eventos = new ArrayList<>();
+
+                //Possui resultados:
+                if (eventos.size() <= 0)
+                    noResults();
+
                 Calendar now = Calendar.getInstance();
                 for (Evento evt : listResource.getData()) {
                     if (!evt.getDataRealizacaoAsCalendar().before(now)) {
@@ -210,5 +221,20 @@ public class FilterdActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
             }
         });
+    }
+
+    private void noResults() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Nenhum resultado encontrado");
+        alert.setIcon(android.R.drawable.ic_dialog_info);
+        alert.setCancelable(false);
+
+        alert.setPositiveButton("OK", (dialog, which) -> {
+            this.finish();
+        });
+
+        alert.create();
+        alert.show();
     }
 }

@@ -45,6 +45,14 @@
                 android:textSize="36dp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/textOngOfEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Ong responsavel"
+                android:textStyle="italic" />
+
             <LinearLayout
                 android:id="@+id/ongOwnerOptions"
                 android:layout_width="match_parent"
