@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,7 +20,6 @@ import com.crossover.mobiliza.app.R;
 import com.crossover.mobiliza.app.data.local.entity.Evento;
 import com.crossover.mobiliza.app.data.local.entity.Ong;
 import com.crossover.mobiliza.app.data.local.entity.User;
-import com.crossover.mobiliza.app.data.remote.Resource;
 import com.crossover.mobiliza.app.ui.detailed.DetailedEventActivity;
 import com.crossover.mobiliza.app.ui.detailed.DetailedOngActivity;
 import com.crossover.mobiliza.app.ui.main.adapters.AdapterEvents;
@@ -39,7 +37,6 @@ public class FilterdActivity extends AppCompatActivity {
     private FilteredViewModel myViewModel;
     private ProgressDialog mProgressDialog;
     private RecyclerView recyclerView;
-    private String categoriaEvento;
 
     private TextView entidadeFiltrada;
     private TextView filtroAplicado;
@@ -56,7 +53,7 @@ public class FilterdActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage(getString(R.string.progress_message));
         mProgressDialog.setCancelable(false);
-        categoriaEvento = new String();
+
         // RecyclerView Config
         recyclerView = findViewById(R.id.recyclerFiltered);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -99,7 +96,6 @@ public class FilterdActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Nada
-
     }
 
     private void filteredOngs() {
@@ -166,9 +162,7 @@ public class FilterdActivity extends AppCompatActivity {
 
                         if (!evt.getDataRealizacaoAsCalendar().before(now)) {
                             if (isCategoria) {
-
-                                getOngCategory(evt.getIdOng());
-                                if (getCategoriaEvento().equals(filtro)) {
+                                if (evt.getCategoria() != null &&  evt.getCategoria().equals(filtro)) {
                                     eventos.add(evt);
                                 }
                             } else {
@@ -179,11 +173,8 @@ public class FilterdActivity extends AppCompatActivity {
                     }
                 }
 
-                // TODO: Colocar categoria em evento!
-                if (!isCategoria) {
-                    if (eventos.size() <= 0)
-                        noResults();
-                }
+                if (eventos.size() <= 0)
+                    noResults();
 
                 // Adapter Config
                 AdapterEvents adapterEvents = new AdapterEvents(eventos);
@@ -249,29 +240,5 @@ public class FilterdActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
-    }
-
-    private void getOngCategory(Long idOng) {
-        myViewModel.getOngById(this, idOng).observe(this, ongResource -> {
-            if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
-                Ong ong = ongResource.getData();
-                setCategoriaEvento(ong.getCategoria());
-            } else if (ongResource.getStatus() == Resource.Status.LOADING) {
-                mProgressDialog.show();
-
-            } else if (ongResource.getStatus() == Resource.Status.ERROR) {
-                mProgressDialog.dismiss();
-                Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    public String getCategoriaEvento() {
-        return categoriaEvento;
-    }
-
-    public void setCategoriaEvento(String categoriaEvento) {
-        this.categoriaEvento = categoriaEvento;
     }
 }

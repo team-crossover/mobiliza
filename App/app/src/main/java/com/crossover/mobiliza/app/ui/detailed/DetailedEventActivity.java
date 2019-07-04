@@ -48,6 +48,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private Button bAddAgenda;
     private ImageView imgView;
     private TextView ongName;
+    private TextView categoria;
 
     // Agenda
     private String descEvento;
@@ -91,6 +92,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         bAddAgenda = findViewById(R.id.buttonCalendar);
         imgView = findViewById(R.id.detailEventImage);
         ongName = findViewById(R.id.textOngOfEvent);
+        categoria = findViewById(R.id.textCategoryOfEvent);
 
         descEventoTV = findViewById(R.id.detailEventDescription);
         regiaoEventoTV = findViewById(R.id.detailEventRegion);
@@ -152,6 +154,8 @@ public class DetailedEventActivity extends AppCompatActivity {
                 dataEventoTV.setVisibility(View.VISIBLE);
                 dataEventoTV.setText(evt.getDataRealizacao());
                 getOngName(evt.getIdOng());
+                categoria.setVisibility(View.VISIBLE);
+                categoria.setText("(Categoria " + evt.getCategoria() + ")");
 
                 if (evt.getIdsConfirmados() != null) {
                     qntConfirmados.setVisibility(View.VISIBLE);

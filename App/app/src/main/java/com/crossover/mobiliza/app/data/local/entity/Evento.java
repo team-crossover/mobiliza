@@ -31,6 +31,8 @@ public class Evento {
 
     private String img;
 
+    private String categoria;
+
     public Long getId() {
         return id;
     }
@@ -109,5 +111,13 @@ public class Evento {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
