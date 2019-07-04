@@ -6,80 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".ui.event.AddEventActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginBottom="6dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewNomeEvento"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Nome"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/eventoNomeText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Novo evento" />
+            <TextView
+                android:id="@+id/textViewNomeEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Nome"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textViewImagemEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Imagem"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            <EditText
+                android:id="@+id/eventoNomeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Novo evento" />
 
-        <ImageButton
-            android:id="@+id/eventoImgButton"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:adjustViewBounds="true"
-            android:padding="20dp"
-            android:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars"/>
+            <TextView
+                android:id="@+id/textViewImagemEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Imagem"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textViewDescEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Nome"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            <ImageButton
+                android:id="@+id/eventoImgButton"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@tools:sample/avatars"/>
 
-        <EditText
-            android:id="@+id/eventoDescricaoText"
-            android:layout_width="match_parent"
-            android:layout_height="159dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:text="Descrição" />
+            <TextView
+                android:id="@+id/textViewDescEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Descrição"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/eventSaveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar" />
+            <EditText
+                android:id="@+id/eventoDescricaoText"
+                android:layout_width="match_parent"
+                android:layout_height="159dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:text="Descrição" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textViewEndEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Endereço"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/eventoEnderecoText"
+                android:layout_width="match_parent"
+                android:layout_height="159dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:text="Endereço" />
+
+            <TextView
+                android:id="@+id/textViewRegioesEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Região"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spEventoRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="44dp" />
+
+            <Button
+                android:id="@+id/eventSaveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

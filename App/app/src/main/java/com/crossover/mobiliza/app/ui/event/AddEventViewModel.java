@@ -47,13 +47,15 @@ public class AddEventViewModel extends ViewModel {
     }
 
     public void saveEvent(Context context,
-                          String nome, String regiao, String descricao, Calendar data,
+                          String nome, String regiao, String descricao,
+                          String endereco, Calendar data,
                           Consumer<Evento> onSuccess,
                           Consumer<String> onFailure) {
 
         Evento evt = new Evento();
         evt.setId(mEventId);
         evt.setNome(nome);
+        evt.setEndereco(endereco);
         evt.setDescricao(descricao);
         evt.setDataRealizacao(data);
         evt.setRegiao(regiao);

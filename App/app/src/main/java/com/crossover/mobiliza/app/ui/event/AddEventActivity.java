@@ -10,9 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -41,9 +45,21 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText nameText;
     private EditText descricao;
     private ImageButton imageButton;
+    private EditText enderecoText;
+    private Spinner regiaoSpinner;
+
+    private String[] regioesArray = new String[]{
+            RegiaoEnum.CENTRO.getText(),
+            RegiaoEnum.LESTE.getText(),
+            RegiaoEnum.NOROESTE.getText(),
+            RegiaoEnum.NORTE.getText(),
+            RegiaoEnum.OESTE.getText(),
+            RegiaoEnum.SUDOESTE.getText(),
+            RegiaoEnum.SUL.getText()
+    };
 
     /**
-     * TODO: inserir captação de dados para os outros atributos de evento: data, endereço, região(possui enum). Olhar a entidade evento.
+     * TODO: inserir captação de dados para os outros atributos de evento: data. Olhar a entidade evento.
      */
     private String regiao;
     private Calendar data;
@@ -71,12 +87,31 @@ public class AddEventActivity extends AppCompatActivity {
         nameText = findViewById(R.id.eventoNomeText);
 
         /**
-         * TODO: regiao, dataRealizacao e descricao (O QUE ESTÁ AQUI É TEMPORÁRIO, PQ NÃO PODE SER NULO)
+         * TODO: dataRealizacao (O QUE ESTÁ AQUI É TEMPORÁRIO, PQ NÃO PODE SER NULO)
          */
-        regiao = RegiaoEnum.CENTRO.getText();
         data = new GregorianCalendar(2019, 6, 28, 13, 25);
 
         descricao = findViewById(R.id.eventoDescricaoText);
+        enderecoText = findViewById(R.id.eventoEnderecoText);
+
+        regiaoSpinner = findViewById(R.id.spEventoRegiao);
+        ArrayAdapter<String> adapterRegiao = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, regioesArray);
+        adapterRegiao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regiaoSpinner.setAdapter(adapterRegiao);
+
+        regiaoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                regiao = regiaoSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         imageButton = findViewById(R.id.eventoImgButton);
         imageButton.setOnClickListener(this::onClickImg);
@@ -98,10 +133,12 @@ public class AddEventActivity extends AppCompatActivity {
                 mViewModel.setEventImg(evt.getImg());
 
                 nameText.setVisibility(View.VISIBLE);
+                enderecoText.setVisibility(View.VISIBLE);
 
                 // Set the fields to contain  the event's information
                 nameText.setText(evt.getNome());
                 descricao.setText(evt.getDescricao());
+                enderecoText.setText(evt.getEndereco());
 
                 //Imagem
                 if (mViewModel.getEventImg() == null || mViewModel.getEventImg().isEmpty()) {
@@ -113,6 +150,11 @@ public class AddEventActivity extends AppCompatActivity {
                         Log.e(TAG, "onStart: onSetImg: " + ex.getMessage());
                         imageButton.setImageBitmap(ImageUtils.getDefaultEventImg());
                     }
+                }
+
+                int indexRegiao = verifySpinnerElement(regioesArray, evt.getRegiao());
+                if (indexRegiao != -1) {
+                    regiaoSpinner.setSelection(indexRegiao);
                 }
 
             } else if (eventoResource.getStatus() == Resource.Status.LOADING) {
@@ -134,7 +176,7 @@ public class AddEventActivity extends AppCompatActivity {
     private void onSave(View view) {
         mProgressDialog.show();
         try {
-            mViewModel.saveEvent(this, nameText.getText().toString(), regiao, descricao.getText().toString(), data,
+            mViewModel.saveEvent(this, nameText.getText().toString(), regiao, descricao.getText().toString(), enderecoText.getText().toString(), data,
                     newEvent -> {
                         mProgressDialog.dismiss();
                         Toast.makeText(this.getApplicationContext(), this.getString(R.string.toast_save_success), Toast.LENGTH_LONG).show();
@@ -188,6 +230,25 @@ public class AddEventActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private int verifySpinnerElement(String[] array, String element) {
+        int indexArray = 0;
+
+        if (array == null) {
+            return -1;
+        }
+
+        int len = array.length;
+        while (indexArray < len) {
+            if (array[indexArray].equals(element)) {
+                return indexArray;
+            } else {
+                indexArray++;
+            }
+        }
+
+        return -1;
     }
 
 }

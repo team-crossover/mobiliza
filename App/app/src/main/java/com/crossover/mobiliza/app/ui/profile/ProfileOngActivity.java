@@ -123,7 +123,7 @@ public class ProfileOngActivity extends AppCompatActivity {
         regiaoSpinner = findViewById(R.id.spRegiao);
         ArrayAdapter<String> adapterRegiao = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, regioesArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterRegiao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regiaoSpinner.setAdapter(adapterRegiao);
 
         regiaoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
