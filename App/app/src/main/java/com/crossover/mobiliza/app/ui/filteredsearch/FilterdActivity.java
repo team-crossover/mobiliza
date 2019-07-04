@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -32,9 +34,12 @@ import java.util.List;
 
 public class FilterdActivity extends AppCompatActivity {
 
+    private static final String TAG = FilterdActivity.class.getSimpleName();
+
     private FilteredViewModel myViewModel;
     private ProgressDialog mProgressDialog;
     private RecyclerView recyclerView;
+    private String categoriaEvento;
 
     private TextView entidadeFiltrada;
     private TextView filtroAplicado;
@@ -51,7 +56,7 @@ public class FilterdActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage(getString(R.string.progress_message));
         mProgressDialog.setCancelable(false);
-
+        categoriaEvento = new String();
         // RecyclerView Config
         recyclerView = findViewById(R.id.recyclerFiltered);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -63,7 +68,7 @@ public class FilterdActivity extends AppCompatActivity {
         filtroAplicado = findViewById(R.id.textFilter);
 
         Intent intent = getIntent();
-        //Intents: isEvento/isOng, category/region, filter
+        //Intents: isEvento, category, filter
         if (intent.hasExtra("isEvento")) {
             entidadeFiltrada.setText("Filtrando Eventos");
             isEvento = true;
@@ -82,11 +87,6 @@ public class FilterdActivity extends AppCompatActivity {
             isCategoria = false;
         }
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         if (isEvento) {
             filteredEvents();
         } else {
@@ -95,25 +95,32 @@ public class FilterdActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Nada
+
+    }
+
     private void filteredOngs() {
         myViewModel.findAllOngs(this).observe(this, listResource -> {
             if (listResource.getData() != null) {
                 List<Ong> ongs = new ArrayList<>();
 
-                //Possui resultados:
-                if (ongs.size() <= 0)
-                    noResults();
-
                 for (Ong ong : listResource.getData()) {
                     if (isCategoria) {
-                        if (ong.getCategoria().equals(filtro))
+                        if (ong.getCategoria().equals(filtro)) {
                             ongs.add(ong);
-
+                        }
                     } else {
-                        if (ong.getRegiao().equals(filtro))
+                        if (ong.getRegiao().equals(filtro)) {
                             ongs.add(ong);
+                        }
                     }
                 }
+                // Resultados encontrados?
+                if (ongs.size() <= 0)
+                    noResults();
 
                 // Adapter Config
                 AdapterOngs adapterOngs = new AdapterOngs(ongs);
@@ -153,35 +160,36 @@ public class FilterdActivity extends AppCompatActivity {
             if (listResource.getData() != null) {
                 mProgressDialog.show();
                 List<Evento> eventos = new ArrayList<>();
-
-                //Possui resultados:
-                if (eventos.size() <= 0)
-                    noResults();
-
                 Calendar now = Calendar.getInstance();
                 for (Evento evt : listResource.getData()) {
                     if (!evt.getDataRealizacaoAsCalendar().before(now)) {
-                        if (isCategoria) {
-                            myViewModel.getOngById(getApplicationContext(), evt.getIdOng()).observe(this, ongResource -> {
-                                if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
-                                    Ong ong = ongResource.getData();
-                                    if (ong.getCategoria().equals(filtro)) {
-                                        eventos.add(evt);
-                                    }
+
+                        if (!evt.getDataRealizacaoAsCalendar().before(now)) {
+                            if (isCategoria) {
+
+                                getOngCategory(evt.getIdOng());
+                                if (getCategoriaEvento().equals(filtro)) {
+                                    eventos.add(evt);
                                 }
-                            });
-                        } else {
-                            if (evt.getRegiao().equals(filtro))
-                                eventos.add(evt);
+                            } else {
+                                if (evt.getRegiao().equals(filtro))
+                                    eventos.add(evt);
+                            }
                         }
                     }
+                }
 
+                // TODO: Colocar categoria em evento!
+                if (!isCategoria) {
+                    if (eventos.size() <= 0)
+                        noResults();
                 }
 
                 // Adapter Config
                 AdapterEvents adapterEvents = new AdapterEvents(eventos);
 
                 // RecyclerView Config
+                recyclerView = findViewById(R.id.recyclerFiltered);
                 recyclerView.setAdapter(adapterEvents);
 
                 // Click event
@@ -235,6 +243,35 @@ public class FilterdActivity extends AppCompatActivity {
         });
 
         alert.create();
-        alert.show();
+        try {
+            alert.show();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+
+    }
+
+    private void getOngCategory(Long idOng) {
+        myViewModel.getOngById(this, idOng).observe(this, ongResource -> {
+            if (ongResource.getStatus() == Resource.Status.SUCCESS && ongResource.getData() != null) {
+                Ong ong = ongResource.getData();
+                setCategoriaEvento(ong.getCategoria());
+            } else if (ongResource.getStatus() == Resource.Status.LOADING) {
+                mProgressDialog.show();
+
+            } else if (ongResource.getStatus() == Resource.Status.ERROR) {
+                mProgressDialog.dismiss();
+                Toast.makeText(this, this.getString(R.string.toast_data_error), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public String getCategoriaEvento() {
+        return categoriaEvento;
+    }
+
+    public void setCategoriaEvento(String categoriaEvento) {
+        this.categoriaEvento = categoriaEvento;
     }
 }
