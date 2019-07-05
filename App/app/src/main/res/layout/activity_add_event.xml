@@ -69,13 +69,48 @@
                 android:text="Descrição" />
 
             <TextView
-                android:id="@+id/textViewEndEvento"
+                android:id="@+id/textViewDataEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Data do evento"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/eventoData"
+                android:layout_width="469dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="DD/MM/YYYY"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textViewHoraEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Horário do evento"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/eventoHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="00:00"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/textViewEndEvento2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" Endereço"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/eventoEnderecoText"

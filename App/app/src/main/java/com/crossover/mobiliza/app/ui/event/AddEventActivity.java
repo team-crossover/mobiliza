@@ -2,7 +2,9 @@ package com.crossover.mobiliza.app.ui.event;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,10 +15,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -34,7 +37,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AddEventActivity extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = AddEventActivity.class.getSimpleName();
     private static final int PICK_IMAGE = 452;
@@ -46,6 +49,9 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText descricao;
     private ImageButton imageButton;
     private EditText enderecoText;
+    private EditText eventoData;
+    private EditText eventoHora;
+
     private Spinner regiaoSpinner;
 
     private String[] regioesArray = new String[]{
@@ -57,6 +63,8 @@ public class AddEventActivity extends AppCompatActivity {
             RegiaoEnum.SUDOESTE.getText(),
             RegiaoEnum.SUL.getText()
     };
+
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     /**
      * TODO: inserir captação de dados para os outros atributos de evento: data. Olhar a entidade evento.
@@ -85,14 +93,13 @@ public class AddEventActivity extends AppCompatActivity {
         mViewModel.setGoogleIdToken(googleIdToken);
 
         nameText = findViewById(R.id.eventoNomeText);
-
-        /**
-         * TODO: dataRealizacao (O QUE ESTÁ AQUI É TEMPORÁRIO, PQ NÃO PODE SER NULO)
-         */
-        data = new GregorianCalendar(2019, 6, 28, 13, 25);
-
         descricao = findViewById(R.id.eventoDescricaoText);
         enderecoText = findViewById(R.id.eventoEnderecoText);
+        eventoData = (EditText) findViewById(R.id.eventoData);
+        eventoHora = (EditText) findViewById(R.id.eventoHora);
+
+        eventoData.setOnClickListener(this);
+        eventoHora.setOnClickListener(this);
 
         regiaoSpinner = findViewById(R.id.spEventoRegiao);
         ArrayAdapter<String> adapterRegiao = new ArrayAdapter<String>(this,
@@ -140,6 +147,19 @@ public class AddEventActivity extends AppCompatActivity {
                 descricao.setText(evt.getDescricao());
                 enderecoText.setText(evt.getEndereco());
 
+                data = evt.getDataRealizacaoAsCalendar();
+                mYear = data.get(Calendar.YEAR);
+                mMonth = data.get(Calendar.MONTH);
+                mDay = data.get(Calendar.DAY_OF_MONTH);
+                eventoData.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
+
+                mHour = data.get(Calendar.HOUR_OF_DAY);
+                mMinute = data.get(Calendar.MINUTE);
+                eventoHora.setText(mHour + ":" + mMinute);
+
+                eventoData.setOnClickListener(this);
+                eventoHora.setOnClickListener(this);
+
                 //Imagem
                 if (mViewModel.getEventImg() == null || mViewModel.getEventImg().isEmpty()) {
                     imageButton.setImageBitmap(ImageUtils.getDefaultEventImg());
@@ -176,6 +196,20 @@ public class AddEventActivity extends AppCompatActivity {
     private void onSave(View view) {
         mProgressDialog.show();
         try {
+
+            //Tratamento de data feito para a formatação aprorpiada para o Calendar
+            String[] dataString, horaString;
+            dataString = eventoData.getText().toString().split("/");
+            horaString = eventoHora.getText().toString().split(":");
+
+            int dia = Integer.parseInt(dataString[0]);
+            int mes = Integer.parseInt(dataString[1]);
+            int ano = Integer.parseInt(dataString[2]);
+            int horas = Integer.parseInt(horaString[0]);
+            int minutos = Integer.parseInt(horaString[1]);
+
+            data = new GregorianCalendar(ano, mes, dia, horas, minutos);
+
             mViewModel.saveEvent(this, nameText.getText().toString(), regiao, descricao.getText().toString(), enderecoText.getText().toString(), data,
                     newEvent -> {
                         mProgressDialog.dismiss();
@@ -186,8 +220,6 @@ public class AddEventActivity extends AppCompatActivity {
                         mProgressDialog.dismiss();
                         Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + errorMsg, Toast.LENGTH_LONG).show();
                     });
-
-
         } catch (Exception e) {
             mProgressDialog.dismiss();
             Toast.makeText(this, this.getString(R.string.toast_save_error) + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -251,4 +283,48 @@ public class AddEventActivity extends AppCompatActivity {
         return -1;
     }
 
+    @Override
+    public void onClick(View view) {
+
+        if (view == eventoData) {
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            eventoData.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if (view == eventoHora) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            eventoHora.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+    }
 }
