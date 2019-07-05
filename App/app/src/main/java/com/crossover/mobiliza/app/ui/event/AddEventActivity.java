@@ -65,10 +65,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     };
 
     private int mYear, mMonth, mDay, mHour, mMinute;
-
-    /**
-     * TODO: inserir captação de dados para os outros atributos de evento: data. Olhar a entidade evento.
-     */
     private String regiao;
     private Calendar data;
 
@@ -125,6 +121,23 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         Button saveButton = findViewById(R.id.eventSaveButton);
         saveButton.setOnClickListener(this::onSave);
+
+        //Data automática inicial para o dia seguinte
+        if ((eventoData.getText() == null || eventoData.getText().toString().isEmpty()) && (eventoHora.getText() == null || eventoHora.getText().toString().isEmpty())) {
+            Calendar tomorrow = Calendar.getInstance();
+            tomorrow.add(Calendar.DAY_OF_YEAR, 1);
+            data = tomorrow;
+
+            mYear = data.get(Calendar.YEAR);
+            mMonth = data.get(Calendar.MONTH);
+            mDay = data.get(Calendar.DAY_OF_MONTH);
+            eventoData.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
+
+            mHour = data.get(Calendar.HOUR_OF_DAY);
+            mMinute = data.get(Calendar.MINUTE);
+            eventoHora.setText(mHour + ":" + mMinute);
+
+        }
 
         Log.i(TAG, "onCreate: ");
     }
@@ -197,18 +210,25 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         mProgressDialog.show();
         try {
 
-            //Tratamento de data feito para a formatação aprorpiada para o Calendar
-            String[] dataString, horaString;
-            dataString = eventoData.getText().toString().split("/");
-            horaString = eventoHora.getText().toString().split(":");
+            if ((eventoData.getText() == null || eventoData.getText().toString().isEmpty()) && (eventoHora.getText() == null || eventoHora.getText().toString().isEmpty())) {
+                Calendar tomorrow = Calendar.getInstance();
+                tomorrow.add(Calendar.DAY_OF_YEAR, 1);
+                data = tomorrow;
 
-            int dia = Integer.parseInt(dataString[0]);
-            int mes = Integer.parseInt(dataString[1]);
-            int ano = Integer.parseInt(dataString[2]);
-            int horas = Integer.parseInt(horaString[0]);
-            int minutos = Integer.parseInt(horaString[1]);
+            } else {
+                //Tratamento de data feito para a formatação aprorpiada para o Calendar
+                String[] dataString, horaString;
+                dataString = eventoData.getText().toString().split("/");
+                horaString = eventoHora.getText().toString().split(":");
 
-            data = new GregorianCalendar(ano, mes, dia, horas, minutos);
+                int dia = Integer.parseInt(dataString[0]);
+                int mes = Integer.parseInt(dataString[1]) - 1;
+                int ano = Integer.parseInt(dataString[2]);
+                int horas = Integer.parseInt(horaString[0]);
+                int minutos = Integer.parseInt(horaString[1]);
+
+                data = new GregorianCalendar(ano, mes, dia, horas, minutos);
+            }
 
             mViewModel.saveEvent(this, nameText.getText().toString(), regiao, descricao.getText().toString(), enderecoText.getText().toString(), data,
                     newEvent -> {
